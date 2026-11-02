@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>EASA Module 02 Physics — คู่มืออ่าน 7 วัน (ไทย/EN)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+:root{
+  --bg:#F2F5F7; --paper:#FFFFFF; --ink:#14232F; --muted:#5A6B78; --line:#D3DCE2;
+  --steel:#2A5A78; --steel-soft:#E4EEF4; --tag:#E0A100; --tag-bg:#FFF5D6; --ok:#2E7D5B;
+  --font:"IBM Plex Sans Thai","Noto Sans Thai","Sarabun",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0E171E; --paper:#15212A; --ink:#E4ECF1; --muted:#8FA3B0; --line:#26384A;
+    --steel:#8CBFDD; --steel-soft:#1B2D3A; --tag:#E3A82A; --tag-bg:#2A2412; --ok:#5CBF94;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.7}
+a{color:var(--steel)}
+:focus-visible{outline:3px solid var(--tag);outline-offset:2px}
+
+header.top{background:var(--paper);border-bottom:1px solid var(--line);padding:20px 20px 16px}
+.top-inner{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between}
+h1{margin:0;font-size:1.65rem;line-height:1.25;font-weight:600;letter-spacing:-.01em}
+.sub{margin:4px 0 0;color:var(--muted);font-size:.95rem}
+.controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{font:inherit;font-size:.9rem;padding:6px 14px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--steel);color:var(--paper);font-weight:500}
+.ctl-label{font-size:.85rem;color:var(--muted);margin-right:6px}
+#progress{font-size:.9rem;color:var(--muted)}
+#progress b{color:var(--ok);font-weight:600}
+
+.layout{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 20px 60px}
+nav.rail{position:sticky;top:16px;align-self:start}
+nav.rail ol{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+nav.rail li a{display:flex;align-items:center;gap:10px;padding:9px 12px;margin-left:-2px;border-left:2px solid transparent;text-decoration:none;color:var(--ink);line-height:1.3}
+nav.rail li a:hover{background:var(--steel-soft)}
+nav.rail li a[aria-current="page"]{border-left-color:var(--tag);background:var(--tag-bg);font-weight:500}
+.nav-t{display:block;font-size:.95rem}
+.nav-s{display:block;font-size:.8rem;color:var(--muted);font-weight:400}
+.tick{margin-left:auto;width:20px;height:20px;border:1.5px solid var(--line);border-radius:4px;flex:none;display:grid;place-items:center;font-size:.8rem;color:transparent}
+.tick.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.tick.none{visibility:hidden}
+
+main{min-width:0}
+article{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:28px 32px 32px}
+article h2{font-size:1.5rem;line-height:1.3;margin:0 0 14px;font-weight:600;padding-left:14px;border-left:5px solid var(--tag)}
+article h2:not(:first-child){margin-top:40px}
+article h3{font-size:1.15rem;margin:32px 0 10px;font-weight:600;color:var(--steel)}
+article p{max-width:74ch;margin:0 0 12px}
+article ul,article ol{max-width:80ch;padding-left:1.4em;margin:0 0 14px}
+article li{margin-bottom:6px}
+article li > p{margin:0}
+.tablewrap{overflow-x:auto;margin:14px 0 18px;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;line-height:1.55}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--steel-soft);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+table.bi td:first-child{font-weight:600;min-width:130px}
+table.bi td.c-en,table.bi td.c-th{min-width:240px}
+td a{font-weight:500}
+.formula{overflow-x:auto;padding:12px 14px;margin:10px 0;background:var(--steel-soft);border-radius:6px}
+.formula .katex-display{margin:.3em 0}
+pre{overflow-x:auto;padding:12px 14px;background:var(--steel-soft);border-radius:6px}
+ul.tricks{list-style:none;padding:14px 18px;background:var(--tag-bg);border-left:5px solid var(--tag);border-radius:0 6px 6px 0}
+ul.tricks li{padding-left:0}
+ol.practice{background:var(--steel-soft);border-radius:6px;padding:14px 18px 14px 2.2em}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em}
+
+.pager{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.pager a,.pager button{font:inherit;font-size:.95rem;padding:9px 16px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);text-decoration:none;cursor:pointer}
+.pager a:hover,.pager button:hover{background:var(--steel-soft)}
+.pager button.done{background:var(--ok);border-color:var(--ok);color:#fff;font-weight:500}
+footer{max-width:1180px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font-size:.85rem}
+
+
+/* Mock test and calc lab */
+.note{background:var(--steel-soft);border-radius:6px;padding:12px 14px;margin:0 0 18px;font-size:.93rem;line-height:1.6}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:0 0 8px}
+button.big{font:inherit;text-align:left;padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;gap:4px}
+button.big span{font-size:.88rem;color:var(--muted)}
+button.big:hover:not(:disabled){border-color:var(--tag);background:var(--tag-bg)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 16px}
+.chip{font:inherit;font-size:.9rem;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);cursor:pointer}
+.chip:hover{background:var(--steel-soft)}
+.chip.on{background:var(--steel);border-color:var(--steel);color:var(--paper)}
+.examBar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px;font-weight:500}
+.timer{font-variant-numeric:tabular-nums;font-size:1.15rem;padding:2px 10px;border:1px solid var(--line);border-radius:6px}
+.timer.low{color:#fff;background:#C0392B;border-color:#C0392B}
+.qcard{border:1px solid var(--line);border-radius:8px;padding:18px;margin:0 0 14px}
+.qcard .stem{font-size:1.08rem;margin:0 0 14px;max-width:none}
+button.opt{width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;font:inherit;padding:11px 12px;margin:0 0 8px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);cursor:pointer}
+button.opt .ltr{flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:.85rem;font-weight:600}
+button.opt:hover{background:var(--steel-soft)}
+button.opt.sel{border-color:var(--steel);background:var(--steel-soft)}
+button.opt.sel .ltr{background:var(--steel);border-color:var(--steel);color:var(--paper)}
+button.opt.right{border-color:var(--ok);background:rgba(46,125,91,.12)}
+button.opt.wrong{border-color:#C0392B;background:rgba(192,57,43,.12)}
+.expl{margin-top:10px;padding:10px 12px;border-left:4px solid var(--tag);background:var(--tag-bg);border-radius:0 6px 6px 0}
+.qnav{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px}
+.qnav button,button.finish,button.linkbtn{font:inherit;padding:8px 16px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);cursor:pointer}
+.qnav button.on{border-color:var(--tag);background:var(--tag-bg)}
+button.finish{background:var(--steel);border-color:var(--steel);color:var(--paper);font-weight:500;margin-right:10px}
+button.linkbtn{border:0;background:transparent;color:var(--muted);text-decoration:underline}
+.qgrid{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}
+.qgrid .g{width:36px;height:34px;font:inherit;font-size:.85rem;border:1px solid var(--line);border-radius:5px;background:var(--paper);color:var(--ink);cursor:pointer}
+.qgrid .g.ans{background:var(--steel-soft)}
+.qgrid .g.flag{border-color:var(--tag);box-shadow:inset 0 -3px 0 var(--tag)}
+.qgrid .g.cur{outline:2px solid var(--steel)}
+.score{padding:18px;border-radius:8px;margin:0 0 16px;border:1px solid var(--line)}
+.score.pass{border-color:var(--ok);background:rgba(46,125,91,.1)}
+.score.fail{border-color:#C0392B;background:rgba(192,57,43,.08)}
+.big-n{font-size:2rem;font-weight:600;line-height:1.2}
+.big-n small{font-size:1rem;font-weight:400;color:var(--muted)}
+.rev{padding:10px 14px;margin:0 0 10px;border-left:5px solid var(--line);background:var(--paper);border-radius:0 6px 6px 0}
+.rev.ok{border-left-color:var(--ok)}
+.rev.bad{border-left-color:#C0392B}
+.rev p{margin:0 0 4px;max-width:none}
+.rev .why{color:var(--muted);font-size:.92rem}
+.tipcard{border:1px solid var(--line);border-left:5px solid var(--steel);border-radius:0 8px 8px 0;padding:6px 16px 4px;margin:0 0 14px}
+.tipcard h3{margin:8px 0 6px;font-size:1.02rem}
+.ansrow{display:flex;flex-wrap:wrap;gap:8px}
+.ansrow input{flex:1 1 160px;min-width:0;font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink)}
+.ansrow button{font:inherit;padding:9px 14px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);cursor:pointer}
+.ansrow button:first-of-type{background:var(--steel);border-color:var(--steel);color:var(--paper)}
+.fb .ok{color:var(--ok);font-weight:600;margin:10px 0 4px}
+.fb .bad{color:#C0392B;font-weight:600;margin:10px 0 4px}
+.fb ol.steps{background:var(--steel-soft);border-radius:6px;padding:10px 12px 10px 2em;margin:8px 0 0}
+.scoreline{color:var(--muted);font-size:.9rem}
+
+
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 12px}
+button.tab{font:inherit;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;gap:2px}
+button.tab span{font-size:.8rem;color:var(--muted)}
+button.tab.on{border-color:var(--tag);background:var(--tag-bg)}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 8px;font-size:.88rem;color:var(--muted)}
+.badge{background:var(--steel);color:var(--paper);border-radius:999px;padding:1px 10px;font-size:.8rem}
+.qgrid .g.right{background:rgba(46,125,91,.25);border-color:var(--ok)}
+.qgrid .g.wrong{background:rgba(192,57,43,.25);border-color:#C0392B}
+.calcbox{margin-top:10px;padding:10px 12px 4px;background:var(--steel-soft);border-radius:6px}
+.calcbox ol{margin:6px 0 8px;padding-left:1.4em}
+.keybox{margin-top:10px;padding:10px 12px;border-left:4px solid var(--steel);background:var(--steel-soft);border-radius:0 6px 6px 0}
+@media (max-width:640px){.tabs{grid-template-columns:1fr}}
+
+/* Bilingual column switch */
+body[data-cols="th"] .c-en{display:none}
+body[data-cols="en"] .c-th{display:none}
+
+@media (max-width:860px){
+  .layout{grid-template-columns:1fr;gap:16px;padding-top:16px}
+  nav.rail{position:sticky;top:0;z-index:5;background:var(--bg);margin:0 -20px;padding:8px 20px;border-bottom:1px solid var(--line)}
+  nav.rail ol{display:flex;overflow-x:auto;border-left:0;gap:6px;padding-bottom:2px}
+  nav.rail li{flex:none}
+  nav.rail li a{border:1px solid var(--line);border-radius:6px;margin:0;padding:6px 10px;background:var(--paper)}
+  nav.rail li a[aria-current="page"]{border-color:var(--tag)}
+  .nav-s{display:none}
+  .tick{margin-left:4px;width:16px;height:16px;font-size:.7rem}
+  article{padding:20px 16px 24px}
+  article h2{font-size:1.3rem}
+}
+@media (max-width:640px){
+  table.bi thead{display:none}
+  table.bi,table.bi tbody,table.bi tr,table.bi td{display:block;width:100%}
+  table.bi tr{padding:10px 12px;border-bottom:1px solid var(--line)}
+  table.bi td{border:0;padding:3px 0;min-width:0 !important}
+  table.bi td:first-child{font-size:1rem;color:var(--steel)}
+  table.bi td[data-label]:not(:first-child)::before{content:attr(data-label);display:inline-block;font-size:.75rem;font-weight:600;color:var(--tag);margin-right:8px;min-width:2.2em}
+  .tablewrap{border:0}
+}
+@media print{
+  header.top .controls,nav.rail,.pager{display:none}
+  .layout{display:block;padding:0}
+  article{border:0;padding:0}
+}
+</style>
+</head>
+<body data-cols="both">
+
+<header class="top">
+  <div class="top-inner">
+    <div>
+      <h1>EASA Module 02 Physics</h1>
+      <p class="sub">คู่มืออ่าน 7 วัน ไทย/อังกฤษ พร้อมเทคนิคจำ — B1 &amp; B2</p>
+    </div>
+    <div class="controls">
+      <div><span class="ctl-label">คอลัมน์ในตาราง</span>
+        <span class="seg" role="group" aria-label="Table language columns">
+          <button type="button" data-cols="th" aria-pressed="false">ไทย</button>
+          <button type="button" data-cols="en" aria-pressed="false">EN</button>
+          <button type="button" data-cols="both" aria-pressed="true">ทั้งสอง</button>
+        </span>
+      </div>
+      <div id="progress" aria-live="polite"></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="rail" aria-label="Study days"><ol id="navlist"></ol></nav>
+  <main><article id="content" tabindex="-1"></article></main>
+</div>
+<footer>สรุปและอธิบายด้วยถ้อยคำของตัวเอง ไม่ใช่การแปลหนังสือคำต่อคำ และไม่มีรูปประกอบจากหนังสือ ให้เปิดหนังสือ Module 02 (Aircraft Technical Book Co.) ควบคู่ไปด้วย / Study notes in my own words, not a verbatim translation and without the book's figures. Keep the textbook open alongside.</footer>
+
+<script type="text/markdown" id="md">
+คู่มือนี้สรุปและอธิบาย Module 02 Physics (100 หน้า, Aircraft Technical Book Co.) เป็นภาษาไทยคู่กับอังกฤษ แบ่งอ่าน 7 วัน วันละประมาณ 1.5–2 ชั่วโมง
+
+This guide condenses and explains Module 02 Physics (100 pages) in Thai and English, split into 7 reading days of about 1.5–2 hours each.
+
+## แผน 7 วัน / 7-Day Plan
+
+| วัน / Day | หัวข้อ / Topic | หน้าในหนังสือ / Book pages | ระดับ / Level |
+| --- | --- | --- | --- |
+| 1 | Matter + Statics: สสาร แรง ความเค้น การลอยตัว ความดัน | 1.1–1.8, 2.1–2.9 | B1/B2 = 1–2 |
+| 2 | Kinetics: การเคลื่อนที่ กฎของนิวตัน วงกลม ลูกตุ้ม การสั่น | 2.9–2.13 | 2 |
+| 3 | Simple machines: คาน รอก เฟือง ทางเอียง ประสิทธิภาพ | 2.13–2.20 | 2 |
+| 4 | Dynamics: มวล พลังงาน งาน กำลัง แรงบิด แรงเสียดทาน โมเมนตัม ไจโร | 2.20–2.27 | 2 |
+| 5 | Fluid dynamics: ความหนาแน่น Pascal ไฮดรอลิก Bernoulli ความหนืด | 2.28–2.33 | 2 |
+| 6 | Thermodynamics: อุณหภูมิ การถ่ายเทความร้อน กฎแก๊ส วัฏจักรเครื่องยนต์ | 3.1–3.18 | 2 |
+| 7 | Optics + Wave & Sound + ทบทวนรวม | 4.1–4.7, 5.1–5.5 | 2 |
+
+## วิธีใช้ / How to use
+
+1. อ่านสรุปของวันนั้น แล้วเปิดหนังสือตามเลขหน้าที่ระบุเพื่อดูรูปประกอบ / Read the day's summary, then open the book at the listed pages for the figures.
+2. ท่อง trick จำ (ช่อง Memory trick) ก่อนทำโจทย์ / Say the memory tricks aloud before doing the calculations.
+3. ทำโจทย์ท้ายวัน 3 ข้อ แล้วเช็กคำตอบที่หัวข้อ Self-test / Do the 3 end-of-day problems, then check against the Self-test section.
+4. วัน 7 ใช้ Cheat sheet ทบทวนสูตรทั้งหมด / On Day 7, review every formula from the Cheat sheet.
+5. ฝึกโจทย์ที่แท็บ ฝึกคำนวณ และจับเวลาทำข้อสอบจำลองที่แท็บ Mock test / Use the Calculation lab for drills and the Mock test for timed practice.
+
+หมายเหตุ: นี่คือการสรุปและอธิบายด้วยถ้อยคำของผมเอง ไม่ใช่การแปลหนังสือทั้งเล่มคำต่อคำ ข้อสอบจริงอ้างอิงเนื้อหาในหนังสือ จึงควรเปิดหนังสือคู่กันเสมอ / Note: this is a condensed explanation in my own words, not a verbatim translation of the book. The real exam follows the book's content, so keep the book open beside this guide.
+
+## Day 1 — Matter + Statics (หน้า 1.1–1.8, 2.1–2.9)
+
+เป้าหมายวันนี้: อธิบายโครงสร้างอะตอม สถานะของสสาร ความเค้นทั้ง 5 แบบ และคำนวณแรงลอยตัวกับความดันได้ / Goal: explain atomic structure, states of matter, the five stresses, and calculate buoyancy and pressure.
+
+| หัวข้อ / Topic | English (สรุป) | ไทย (อธิบาย) |
+| --- | --- | --- |
+| Atom | Nucleus holds protons (+) and neutrons (0); electrons (−) orbit in shells. Protons set the atomic number. | นิวเคลียสมีโปรตอน (+) กับนิวตรอน (0) อิเล็กตรอน (−) วนเป็นชั้น จำนวนโปรตอนคือเลขอะตอม กำหนดว่าเป็นธาตุอะไร |
+| Valence shell | Outer shell. Full shell = stable = insulator. Few electrons (1 or 3) = loose = conductor. | ชั้นนอกสุด เต็ม = เสถียร = ฉนวน มีอิเล็กตรอนน้อย (1 หรือ 3) = หลุดง่าย = ตัวนำ |
+| Bonding | Atoms share valence electrons in a covalent bond to form molecules. Compound = chemically bonded; mixture = not bonded. | อะตอมใช้อิเล็กตรอนร่วมกันเกิดพันธะโควาเลนต์ สารประกอบ = เชื่อมด้วยเคมี ส่วนสารผสม = ไม่มีพันธะเคมี |
+| Isotopes | Same protons, different neutrons. Hydrogen: protium (0 n), deuterium (1 n), tritium (2 n, radioactive). | โปรตอนเท่ากัน นิวตรอนต่างกัน ไฮโดรเจนมี 3 ไอโซโทป มีเพียงทริเทียมที่กัมมันตรังสี |
+| States of matter | Solid, liquid, gas, plasma. Solids and liquids resist compression; gases compress. | ของแข็ง ของเหลว แก๊ส พลาสมา ของแข็งกับของเหลวแทบไม่ถูกอัด แก๊สถูกอัดได้ |
+| Change of state | Add or remove energy. During the change, temperature stays constant; the energy is latent heat. | เติมหรือดึงพลังงานออก ระหว่างเปลี่ยนสถานะอุณหภูมิคงที่ พลังงานนั้นคือความร้อนแฝง |
+| Catalyst | Speeds a reaction without being used up (e.g. hardener in two-part epoxy). The opposite is an inhibitor. | ตัวเร่งปฏิกิริยา ไม่หมดไป เช่น ตัวทำแข็งของอีพอกซี ตรงข้ามคือตัวหน่วง (inhibitor) |
+| Force, couple, moment | Force has size and direction (a vector). Two equal, opposite, parallel forces at different points make a couple, which produces torque. | แรงมีขนาดและทิศทาง (เวกเตอร์) แรงคู่ขนานเท่ากันทิศตรงข้ามคนละจุดเรียกแรงคู่ ทำให้เกิดแรงบิด |
+| Centre of gravity | The balance point of the aircraft. Checked after modifications and when loading. | จุดสมดุลของอากาศยาน ต้องตรวจเมื่อมีการดัดแปลงหรือบรรทุก |
+| Five stresses | Tension, compression, torsion, shear, bending (bending = tension on the outside + compression on the inside of the bend). | ความเค้น 5 แบบ: ดึง อัด บิด เฉือน งอ โดยการงอ = ด้านนอกถูกดึง ด้านในถูกอัด |
+| Strain | Deformation caused by stress. Elastic material returns to its shape when the load is removed. Used in strain gauges and beam torque wrenches. | การเปลี่ยนรูปที่เกิดจากความเค้น วัสดุยืดหยุ่นคืนรูปเมื่อเอาแรงออก ใช้ใน strain gauge และประแจวัดแรงบิดแบบคานโก่ง |
+| Buoyancy | Archimedes: buoyant force = weight of fluid displaced. Float if buoyant force > weight. | อาร์คิมีดีส: แรงลอยตัว = น้ำหนักของของไหลที่ถูกแทนที่ ลอยถ้าแรงลอยตัวมากกว่าน้ำหนัก |
+| Fluid pressure | Depends on height of the column, not container shape. Water: 8.34 psi at 231 in height. Static + ram = total pressure. | ขึ้นกับความสูงของคอลัมน์ ไม่ขึ้นกับรูปทรงภาชนะ น้ำสูง 231 นิ้ว = 8.34 psi ความดันสถิต + ram = ความดันรวม |
+| Atmosphere | Standard sea level: 14.7 psi = 29.92 inHg = 760 mmHg. Pressure falls with altitude. Altimeter = aneroid barometer. | มาตรฐานระดับน้ำทะเล 14.7 psi = 29.92 นิ้วปรอท = 760 มม.ปรอท ความดันลดเมื่อสูงขึ้น เครื่องวัดความสูงคือบารอมิเตอร์แบบ aneroid |
+
+### สูตรวันนี้ / Formulas
+
+```latex
+F_{buoy} = V \times \rho_{fluid}
+```
+
+น้ำ 62.4 lb/ft³, อากาศ 0.0765 lb/ft³ / water 62.4 lb/ft³, air 0.0765 lb/ft³ (ในหนังสือ)
+
+ตัวอย่างในหนังสือ / book example: วัตถุ 10 ft³ หนัก 700 lb ในน้ำ → แรงลอยตัว 10 × 62.4 = 624 lb < 700 lb → จม น้ำหนักที่ชั่งได้ใต้น้ำ = 76 lb / an object of 10 ft³ weighing 700 lb sinks; its apparent weight under water is 76 lb.
+
+### Memory trick / เทคนิคจำ
+
+- ความเค้น 5 แบบ: **ดึง-อัด-บิด-เฉือน-งอ** ตรงกับ T-C-T-S-B (Tension, Compression, Torsion, Shear, Bending) ท่องเป็นจังหวะเดียวกัน
+- จำนวนอิเล็กตรอนต่อชั้น: **2n²** → 2, 8, 18, 32, 50 (n = 1 ถึง 5)
+- Isotope: **Pro-0, Deu-1, Tri-2** คือจำนวนนิวตรอนเพิ่มทีละ 1 ตามลำดับ ตัวสุดท้ายคือตัวกัมมันตรังสี
+- ความดันบรรยากาศ: **14.7 → 29.92 → 760** (psi → นิ้วปรอท → มม.ปรอท) ท่องเรียงกัน
+- ฉนวน = ชั้นนอก "เต็มบ้าน" ไม่มีใครอยากให้อิเล็กตรอนออก / Insulator = full house, nobody leaves
+- แรงลอยตัว: "ลอยหรือจมดู **แรงลอยตัว vs น้ำหนัก**" ใครมากกว่าชนะ
+
+### โจทย์ท้ายวัน / End-of-day practice
+
+1. ความดันที่ก้นถังน้ำสูง 462 นิ้ว คือกี่ psi? / Pressure at the bottom of a 462 in water column?
+2. วัตถุ 5 ft³ หนัก 400 lb ในน้ำ ลอยหรือจม? / Will a 5 ft³, 400 lb object float in water?
+3. เหตุใดน้ำที่ระดับความสูงมากจึงเดือดที่อุณหภูมิต่ำกว่า 212 °F? / Why does water boil below 212 °F at high altitude?
+
+เฉลยอยู่ในหัวข้อ Self-test ท้ายเอกสาร / Answers are in the Self-test section.
+
+## Day 2 — Kinetics (หน้า 2.9–2.13)
+
+เป้าหมายวันนี้: แยกความเร็วกับความเร็วเวกเตอร์ คำนวณความเร่ง ใช้กฎของนิวตันทั้ง 3 ข้อ และเข้าใจการเคลื่อนที่เป็นวงกลม ลูกตุ้ม การสั่น และ resonance / Goal: separate speed from velocity, compute acceleration, apply Newton's three laws, and understand circular, pendulum and vibratory motion.
+
+| หัวข้อ / Topic | English (สรุป) | ไทย (อธิบาย) |
+| --- | --- | --- |
+| Speed vs velocity | Speed = how fast, no direction. Velocity = speed + direction, so it is a vector. | Speed บอกแค่เร็วแค่ไหน Velocity บอกทั้งความเร็วและทิศทาง จึงเป็นเวกเตอร์ |
+| Acceleration | Rate of change of velocity. Gravity = 32.2 ft/s². 1 mph = 1.467 ft/s. | อัตราการเปลี่ยนความเร็ว แรงโน้มถ่วง = 32.2 ft/s² และ 1 mph = 1.467 ft/s |
+| Newton 1 | A body at rest stays at rest, a moving body keeps moving, unless an outside force acts. This is inertia. | วัตถุนิ่งก็นิ่งต่อ วัตถุเคลื่อนที่ก็เคลื่อนต่อ จนกว่าจะมีแรงภายนอก นี่คือความเฉื่อย |
+| Newton 2 | Force changes momentum; rate of change is proportional to the force. In aviation form: F = W(Vf − Vi) / (g × t). | แรงเปลี่ยนโมเมนตัม อัตราการเปลี่ยนแปรผันตามแรง ในรูปที่ใช้กับเครื่องยนต์ใช้ W(Vf − Vi)/(g·t) |
+| Newton 3 | Every action has an equal and opposite reaction. A propeller pushes air back; air pushes the aircraft forward. Jet thrust is the reaction. | ทุกแรงกริยามีแรงปฏิกิริยาเท่ากันทิศตรงข้าม ใบพัดดันอากาศไปหลัง อากาศดันเครื่องไปหน้า แรงขับของเจ็ตคือปฏิกิริยา |
+| Circular motion | Inertia wants a straight line; the string pulls the object inward (centripetal force). The equal and opposite reaction is centrifugal force. | ความเฉื่อยอยากให้วิ่งตรง แรงดึงเข้าศูนย์กลางจึงบังคับให้โค้ง (centripetal) แรงปฏิกิริยาตรงข้ามคือ centrifugal |
+| Pendulum | Period depends on length and gravity, not on how wide it swings. Longer = slower. | คาบขึ้นกับความยาวและแรงโน้มถ่วง ไม่ขึ้นกับระยะแกว่ง ยิ่งยาวยิ่งช้า |
+| Vibration | Back-and-forth motion about a centre. Period = time per cycle; frequency in Hz = cycles per second. | การสั่นไปมารอบจุดกลาง คาบ = เวลาต่อ 1 รอบ ความถี่หน่วย Hz = รอบต่อวินาที |
+| Resonance | Matter has a natural frequency. A vibrating body at that frequency passes energy to another body and makes it vibrate. Props have placarded rpm ranges to avoid. | วัสดุมีความถี่ธรรมชาติ ถ้าตัวหนึ่งสั่นที่ความถี่นั้นจะถ่ายพลังงานให้อีกตัว ใบพัดจึงมีช่วง rpm ต้องห้ามตามป้ายกำกับ |
+
+### สูตรวันนี้ / Formulas
+
+```latex
+a = \frac{V_f - V_i}{t} \qquad F = \frac{W\,(V_f - V_i)}{g\,t} \qquad F_c = \frac{m\,v^2}{r}
+```
+
+```latex
+T_{pendulum} = 2\pi\sqrt{\frac{L}{g}} \qquad T_{spring} = 2\pi\sqrt{\frac{m}{k}}
+```
+
+ตัวอย่างในหนังสือ / book examples:
+
+- F-15 เร่งจาก 400 เป็น 1 200 mph ใน 20 วินาที → 40 mph/s = 58.7 ft/s² ≈ 1.82 G / F-15 accelerating 400→1 200 mph in 20 s gives 40 mph/s = 58.7 ft/s² ≈ 1.82 G
+- เทอร์โบเจ็ตดันอากาศ 150 lb/s จาก 100 เป็น 1 200 ft/s → แรงขับ 5 124 lb / turbojet moving 150 lb/s of air from 100 to 1 200 ft/s gives 5 124 lb thrust
+- น้ำหนัก 10 lb วงกลมรัศมี 3 ft ความเร็ว 500 ft/s → แรงเข้าศูนย์กลาง ≈ 25 880 lb (ใบพัดพัดลมเทอร์ไบน์รับหลายพัน G ด้วยเหตุผลเดียวกัน)
+
+### Memory trick / เทคนิคจำ
+
+- กฎนิวตัน **1-2-3 = นิ่ง / แรง / คู่**: 1 ความเฉื่อย, 2 แรงเปลี่ยนโมเมนตัม, 3 กริยา-ปฏิกิริยาเป็นคู่
+- **Velocity มี V ของ Vector** ส่วน Speed ไม่มีทิศ
+- เช็กหน่วยด้วยเลขกลม: **60 mph = 88 ft/s** (60 × 1.467)
+- **Centri-petal = หาจุดศูนย์กลาง** (petere = แสวงหา), **Centri-fugal = หนีศูนย์กลาง** (fugere = หนี)
+- ลูกตุ้ม: **ยาว → ช้า, g มาก → เร็ว, แกว่งกว้างไม่เปลี่ยนคาบ** (L อยู่ใต้ราก g อยู่ใต้ราก)
+- Resonance = **"ความถี่เดียวกัน เสียงดังข้ามตัว"** เหมือนสั่นส้อมเสียงตัวหนึ่งแล้วอีกตัวสั่นตาม
+
+### โจทย์ท้ายวัน / End-of-day practice
+
+1. เครื่องบินเร่งจาก 0 เป็น 150 mph ใน 30 วินาที ความเร่งกี่ ft/s² และกี่ G? / Accelerating 0→150 mph in 30 s: acceleration in ft/s² and in G?
+2. เครื่องยนต์ดันอากาศ 200 lb/s จาก 200 เป็น 1 000 ft/s แรงขับกี่ lb? / Engine moving 200 lb/s of air from 200 to 1 000 ft/s: thrust?
+3. ถ้าความยาวลูกตุ้มเพิ่มเป็น 4 เท่า คาบเปลี่ยนอย่างไร? / If pendulum length is quadrupled, what happens to the period?
+
+## Day 3 — Simple Machines (หน้า 2.13–2.20)
+
+เป้าหมายวันนี้: คำนวณคาน รอก เฟือง และทางเอียงได้ พร้อมเข้าใจว่าทำไมไม่มีเครื่องกลใดได้งานเพิ่ม / Goal: calculate levers, pulleys, gears and inclined planes, and understand why no machine gives free work.
+
+| หัวข้อ / Topic | English (สรุป) | ไทย (อธิบาย) |
+| --- | --- | --- |
+| Purpose of machines | Transform energy, transfer energy, multiply force, multiply speed, change direction of force. | แปลงพลังงาน ส่งผ่านพลังงาน ทดแรง ทดความเร็ว และเปลี่ยนทิศทางแรง |
+| Core rule | Gain force = lose distance. Work out cannot exceed work in. | ได้แรงเพิ่มต้องเสียระยะ งานที่ได้ออกมาเกินงานที่ใส่เข้าไปไม่ได้ |
+| Mechanical advantage (MA) | Force out ÷ force in. | แรงที่ได้ออก ÷ แรงที่ใส่เข้า |
+| Lever | Effort × effort arm = resistance × resistance arm (input torque = output torque). | แรงออกแรง × แขนแรง = ความต้านทาน × แขนความต้านทาน (แรงบิดเข้า = แรงบิดออก) |
+| 1st class | Fulcrum between effort and resistance (seesaw, crowbar, pliers). Can gain force or distance, not both. | จุดหมุนอยู่ตรงกลาง (กระดานหก ชะแลง คีม) ได้แรงหรือได้ระยะ แต่ไม่ได้พร้อมกัน |
+| 2nd class | Resistance between fulcrum and effort (wheelbarrow). Always gains force. | ความต้านทานอยู่กลาง (รถเข็น) ได้แรงอย่างเดียว |
+| 3rd class | Effort between fulcrum and resistance (landing gear retraction actuator). Gains speed and distance. | แรงออกแรงอยู่กลาง (แอคชูเอเตอร์พับล้อลงจอด) ได้ความเร็วและระยะ |
+| Pulley | Fixed pulley only changes direction. Movable pulley halves the effort. Block and tackle: MA = number of rope strands supporting the load. | รอกตายเปลี่ยนทิศอย่างเดียว รอกเคลื่อนที่ทดแรงครึ่งหนึ่ง ชุดรอกหลายตัว MA = จำนวนเส้นเชือกที่รับน้ำหนัก |
+| Gears | A large gear driving a small gear makes the small one faster with less force. Reduction gearbox: more rpm in than out, more torque out. | เฟืองใหญ่ขับเฟืองเล็ก เฟืองเล็กหมุนเร็วแต่แรงน้อย เกียร์ทด (reduction) = รอบเข้ามากกว่ารอบออก ได้แรงบิดเพิ่ม |
+| Gear types | Spur (parallel shafts); bevel (changes plane of rotation); worm (very high MA, 1 turn = 1 tooth); planetary (sun, planets, ring; used in prop reduction gearboxes). | Spur (เพลาขนาน); Bevel (เปลี่ยนระนาบการหมุน); Worm (MA สูงมาก 1 รอบ = 1 ฟัน); Planetary (ซัน แพลเนต ริง ใช้ในเกียร์ทดใบพัด) |
+| Gear ratio vs speed ratio | Speed ratio is the inverse of the gear (teeth) ratio: more teeth = slower. | อัตราทดความเร็วกลับกับอัตราทดฟันเฟือง ฟันมาก = หมุนช้า |
+| Inclined plane | MA = length of slope ÷ height. Bolts, screws and wedges work on the same principle. Fine threads give more MA than coarse. | MA = ความยาวทางเอียง ÷ ความสูง สลักเกลียว สกรู และลิ่มทำงานแบบเดียวกัน เกลียวละเอียดได้ MA มากกว่าเกลียวหยาบ |
+| Efficiency | Real performance ÷ ideal performance, as a percentage. No machine reaches 100% because of friction, heat, deflection and wear. | ผลงานจริง ÷ ผลงานอุดมคติ เป็นเปอร์เซ็นต์ ไม่มีเครื่องกลใด 100% เพราะแรงเสียดทาน ความร้อน การเสียรูป และการสึก |
+
+### สูตรและตัวอย่าง / Formulas and examples
+
+```latex
+E \times L = R \times l \qquad MA = \frac{F_{out}}{F_{in}} \qquad \text{Efficiency} = \frac{MA}{\text{Speed ratio}} \times 100
+```
+
+- รถเข็น / wheelbarrow: E × 60 = 300 × 18 → E = 90 lb, MA = 3.33
+- ชุดรอก 4 เส้น / 4-strand tackle: ของหนัก 200 lb ใช้แรง 50 lb
+- เฟืองดาวเคราะห์ / planetary: ring 82 ฟัน ÷ sun 28 ฟัน = 2.93 (เครื่องยนต์หมุนเร็วกว่าใบพัด 2.93 เท่า)
+- Pinion 10 ฟัน ขับ spur 40 ฟัน ที่ 160 rpm → pinion = 40 × 160 ÷ 10 = 640 rpm
+- ทางเอียงชั่งน้ำหนัก Cessna 172 / weighing ramp: สูง 6 in ยาว 24 in น้ำหนัก 1 600 lb → ใช้แรง 1 600 × 6 ÷ 24 = 400 lb (ในหนังสือบรรทัดกลางพิมพ์ 600 lb แต่ผลลัพธ์ที่ถูกคือ 400 lb)
+- ลิ่ม / chisel: ยาว 8 in กว้าง 1/2 in → MA = 16
+
+### Memory trick / เทคนิคจำ
+
+- คาน 3 ชั้น **F-R-E = 1-2-3**: ชั้น 1 ตรงกลางคือ **F**ulcrum, ชั้น 2 ตรงกลางคือ **R**esistance, ชั้น 3 ตรงกลางคือ **E**ffort
+- รอก: **นับเส้นเชือกที่ "แบก" ของ** นั่นคือ MA
+- เฟือง: **"ฟันมาก = ช้า"** และ **"ใหญ่ขับเล็ก = เล็กเร็วแต่อ่อน"** เหมือนปั่นจักรยานเกียร์สูง
+- Worm gear: **MA = จำนวนฟันของ spur** (หมุน 1 รอบ spur ขยับ 1 ฟัน)
+- Reduction gearbox: **"เข้าเร็ว ออกช้า แต่แรงหนัก"**
+- ทุกเครื่องกล: **"ได้แรง เสียระยะ"** ไม่มีของฟรี
+
+### โจทย์ท้ายวัน / End-of-day practice
+
+1. คานมีแขนแรง 48 in ต้านทาน 240 lb อยู่ห่างจุดหมุน 8 in ต้องออกแรงกี่ lb? / Effort arm 48 in, resistance 240 lb at 8 in: effort needed?
+2. ชุดรอกมีเชือกรับน้ำหนัก 6 เส้น ยกของ 300 lb ใช้แรงกี่ lb? / A 6-strand tackle lifts 300 lb: effort?
+3. Pinion 12 ฟัน ขับ spur 36 ฟัน spur หมุน 90 rpm pinion หมุนกี่ rpm? / 12-tooth pinion drives a 36-tooth spur turning at 90 rpm: pinion speed?
+
+## Day 4 — Dynamics (หน้า 2.20–2.27)
+
+เป้าหมายวันนี้: แยกมวลกับน้ำหนัก คำนวณพลังงาน งาน กำลัง แรงบิด และเข้าใจแรงเสียดทาน โมเมนตัม และไจโรสโคป / Goal: separate mass from weight, calculate energy, work, power and torque, and understand friction, momentum and gyroscopes.
+
+| หัวข้อ / Topic | English (สรุป) | ไทย (อธิบาย) |
+| --- | --- | --- |
+| Mass vs weight | Mass = amount of matter, never changes. Weight = pull of gravity on that mass. Mass = weight ÷ g. 32.2 lb = 1 slug. | มวล = ปริมาณเนื้อสาร ไม่เปลี่ยนที่ไหนก็ตาม น้ำหนัก = แรงโน้มถ่วงที่กระทำต่อมวล มวล = น้ำหนัก ÷ g และ 32.2 lb = 1 สลัก |
+| Potential energy | Energy of position: weight × height (ft-lb). Fuel also stores potential (chemical) energy. | พลังงานจากตำแหน่ง = น้ำหนัก × ความสูง (ft-lb) เชื้อเพลิงก็เก็บพลังงานศักย์เคมี |
+| Kinetic energy | Energy of motion: ½ × mass × velocity², with mass = weight ÷ g and velocity in ft/s. | พลังงานจากการเคลื่อนที่ = ½ × มวล × ความเร็ว² โดยมวล = น้ำหนัก ÷ g และความเร็วหน่วย ft/s |
+| Work | Force × distance moved against a resistance. No movement = no work. Units: ft-lb or joule. | แรง × ระยะที่เคลื่อนที่ต้านแรงต้าน ถ้าไม่ขยับ = ไม่มีงาน หน่วย ft-lb หรือ จูล |
+| Friction | Three kinds: starting (static), sliding, rolling. Starting friction is highest; rolling is lowest. Friction force = coefficient × normal force. | แรงเสียดทาน 3 แบบ: เริ่มเคลื่อน (static) ไถล (sliding) กลิ้ง (rolling) แบบเริ่มเคลื่อนมากสุด กลิ้งน้อยสุด แรงเสียดทาน = สัมประสิทธิ์ × แรงตั้งฉาก |
+| Friction and work | Work is done against the actual resistance (e.g. cart rolling friction), not necessarily the full weight. | งานคิดจากแรงต้านจริง เช่น แรงเสียดทานของล้อเกวียน ไม่จำเป็นต้องเท่าน้ำหนักทั้งหมด |
+| Power | Work ÷ time. 1 hp = 550 ft-lb/s = 33 000 ft-lb/min = 746 W. | งาน ÷ เวลา 1 แรงม้า = 550 ft-lb/s = 33 000 ft-lb/min = 746 วัตต์ |
+| Torque | Force × perpendicular distance (lb-in, lb-ft). Torque = hp × 5 252 ÷ rpm. | แรง × ระยะตั้งฉาก (lb-in, lb-ft) แรงบิด = hp × 5 252 ÷ rpm |
+| Heat and efficiency | Real engines lose energy as heat. Best heat engines about 50%; typical 25–35%. | เครื่องยนต์จริงสูญเสียพลังงานเป็นความร้อน ดีที่สุดราว 50% ทั่วไป 25–35% |
+| Momentum | Mass × velocity. Total momentum is conserved in a collision. | มวล × ความเร็ว โมเมนตัมรวมคงที่ในการชน |
+| Impulse | Force × time = change in momentum. | แรง × เวลา = การเปลี่ยนแปลงโมเมนตัม |
+| Gyro rigidity | A spinning rotor keeps pointing in the same direction. Stronger with: heavier rotor, higher speed, mass near the rim, low bearing friction. | โรเตอร์ที่หมุนจะชี้ทิศเดิมในอวกาศ ยิ่งแข็งเมื่อ: หนัก หมุนเร็ว มวลอยู่ริมขอบ ลูกปืนฝืดน้อย |
+| Precession | A force applied to the rotor shows up as movement about the axis at 90° to it. Used in the turn and bank instrument. | แรงที่กระทำต่อโรเตอร์ไปปรากฏเป็นการเคลื่อนที่ในแกนที่ตั้งฉาก 90° ใช้ในเครื่องวัด turn and bank |
+| Gyro types | Captive gyro: one free axis. Free gyro: two rings, two free axes, rotor free to turn 360° in each. | Captive gyro: แกนอิสระ 1 แกน Free gyro: 2 วง 2 แกนอิสระ หมุนอิสระ 360° ทั้งสองแกน |
+
+### สูตรและตัวอย่าง / Formulas and examples
+
+```latex
+PE = W \times h \qquad KE = \tfrac{1}{2}\,\frac{W}{g}\,v^2 \qquad \text{Work} = F \times d \qquad P = \frac{F \times d}{t}
+```
+
+```latex
+\text{Torque} = F \times d \qquad \text{Torque (lb-ft)} = \frac{hp \times 5\,252}{rpm} \qquad \text{Impulse} = F \times t = m\,\Delta v
+```
+
+- Boeing 777 หนัก 600 000 lb วิ่ง 200 ft/s → KE = ½ × (600 000 ÷ 32.2) × 200² ≈ 372 670 000 ft-lb
+- Boeing 747 หนัก 450 000 lb ยก 4 ft → PE = 1 800 000 ft-lb
+- Avgas 1 lb = 18 900 BTU, 1 BTU = 778 ft-lb → ≈ 14 704 200 ft-lb ต่อ 1 lb
+- เครื่องยกเอ็นจิน GE90 หนัก 19 000 lb สูง 4 ft ใน 2 นาที → 38 000 ft-lb/min = 1.15 hp
+- Cessna 172R: 180 hp ที่ 2 700 rpm → 180 × 5 252 ÷ 2 700 = 350 lb-ft
+- ลูกสูบ 500 lb ที่แขนเพลา 4 in → 2 000 lb-in = 166.7 lb-ft
+
+หมายเหตุตัวเลขในหนังสือ / book number notes: หนังสือเขียน "1 joule = 1.36 ft-lb" แต่ค่าที่ถูกคือ 1 ft-lb ≈ 1.36 J และตัวอย่างยก A-320 พิมพ์ 3 ft แต่คำนวณด้วย 4 ft (600 000 ft-lb) ให้ยึดหลักสูตรและทำความเข้าใจที่วิธีคิด / the book prints joules and ft-lb the wrong way round (correct: 1 ft-lb ≈ 1.36 J), and its A-320 example says 3 ft but calculates with 4 ft. Focus on the method.
+
+### Memory trick / เทคนิคจำ
+
+- **มวล = ของ, น้ำหนัก = แรงดึงของโลก**: ไปดวงจันทร์มวลเท่าเดิม น้ำหนักลด (นักบินอวกาศไม่ได้ "ไร้แรงโน้มถ่วง" แค่ตกอิสระ)
+- **KE ขึ้นกับ v²**: ความเร็วเป็น 2 เท่า พลังงานจลน์เป็น 4 เท่า
+- **W-P-T**: Work = F×d, Power = Work÷**T**ime, Torque = F×d แต่คือการ "บิด" ไม่ใช่การเคลื่อนที่
+- แรงม้า **"550 / 33 000 / 746"** (ต่อวินาที / ต่อนาที / วัตต์)
+- Torque **"5252"**: ท่องว่า "ห้า-สอง-ห้า-สอง" แรงม้า × 5252 ÷ รอบ ที่ 5 252 rpm แรงบิดเท่ากับแรงม้าพอดี
+- แรงเสียดทาน **"เริ่ม > ไถล > กลิ้ง"** เริ่มลำบากที่สุด
+- ไจโร 4 ปัจจัยความแข็ง: **"หนัก-เร็ว-ริมขอบ-ฝืดน้อย"**
+- Precession: **"ดันตรงนี้ ไปตอบตรงนู้น 90°"**
+
+### โจทย์ท้ายวัน / End-of-day practice
+
+1. ยกเครื่องบิน 60 000 lb ขึ้น 2 ft ด้วยแม่แรง ทำงานกี่ ft-lb? / Jacking a 60 000 lb aircraft up 2 ft: work done?
+2. ยกของ 3 300 lb สูง 10 ft ใน 1 นาที ต้องใช้กี่ hp? / Lifting 3 300 lb by 10 ft in 1 minute: horsepower required?
+3. เครื่องยนต์ 200 hp ที่ 2 500 rpm ให้แรงบิดกี่ lb-ft? / A 200 hp engine at 2 500 rpm: torque in lb-ft?
+
+## Day 5 — Fluid Dynamics (หน้า 2.28–2.33)
+
+เป้าหมายวันนี้: คำนวณความหนาแน่นและ specific gravity ใช้กฎของ Pascal กับระบบไฮดรอลิก และอธิบายหลักของ Bernoulli และ venturi / Goal: calculate density and specific gravity, use Pascal's law on hydraulic systems, and explain Bernoulli's principle and the venturi.
+
+| หัวข้อ / Topic | English (สรุป) | ไทย (อธิบาย) |
+| --- | --- | --- |
+| Density | Weight per unit volume (lb/ft³ or g/cm³). Water = 62.4 lb/ft³ = 1 g/cm³ at 4 °C. Gas density rises with pressure. | น้ำหนักต่อหน่วยปริมาตร (lb/ft³ หรือ g/cm³) น้ำ = 62.4 lb/ft³ = 1 g/cm³ ที่ 4 °C ความหนาแน่นของแก๊สเพิ่มตามความดัน |
+| Specific gravity | Ratio of a substance's density to water (liquids, solids) or to air (gases). A ratio, so it has no unit. | อัตราส่วนความหนาแน่นของสารต่อน้ำ (ของเหลว ของแข็ง) หรือต่ออากาศ (แก๊ส) เป็นอัตราส่วนจึงไม่มีหน่วย |
+| Hydrometer | A float that measures specific gravity of a liquid. Battery electrolyte: about 1.150 discharged, 1.275–1.310 charged. | ลูกลอยวัด specific gravity ของของเหลว น้ำกรดแบตเตอรี่: ประมาณ 1.150 = หมด, 1.275–1.310 = เต็ม |
+| Fluid | Anything that flows: liquids and gases. Liquids are nearly incompressible; gases compress easily. | สิ่งที่ไหลได้: ของเหลวและแก๊ส ของเหลวแทบอัดไม่ได้ แก๊สอัดได้ง่าย |
+| Pascal's law | Pressure in a confined fluid acts equally in all directions, undiminished, at right angles to the container walls. | ความดันในของไหลที่ปิดกั้นกระจายเท่ากันทุกทิศ ไม่ลดลง และตั้งฉากกับผนัง |
+| Hydraulics | Small piston, small force → large piston, large force. But distance shrinks: volume in = volume out. No gain in work. | ลูกสูบเล็กแรงน้อย → ลูกสูบใหญ่แรงมาก แต่ระยะสั้นลง ปริมาตรเข้า = ปริมาตรออก ไม่ได้งานเพิ่ม |
+| Bernoulli | Where fluid speeds up, static pressure drops (no energy added or removed). Speed = kinetic energy; static pressure = potential energy. | ที่ใดของไหลเร็วขึ้น ความดันสถิตลดลง (เมื่อไม่มีการเพิ่มหรือดึงพลังงาน) ความเร็ว = พลังงานจลน์ ความดันสถิต = พลังงานศักย์ |
+| Venturi | Narrow throat: high speed, low pressure. Wide ends: low speed, high pressure. Used in carburetors, and to explain wing lift and diverging subsonic engine inlets. | คอแคบ: เร็ว ความดันต่ำ ปลายกว้าง: ช้า ความดันสูง ใช้ในคาร์บูเรเตอร์ และอธิบายแรงยกปีกกับท่อไอดีเจ็ตแบบบานออก |
+| Viscosity | Resistance to flow. Measured by the time a fixed amount of fluid takes to pass an orifice (Saybolt universal seconds). | ความต้านทานการไหล วัดจากเวลาที่ของไหลปริมาณคงที่ไหลผ่านรู (หน่วย Saybolt universal seconds) |
+| Streamlining | Gradual shapes keep flow smooth and turbulence low, which is needed for low pressure over a wing. | รูปทรงโค้งต่อเนื่องทำให้ไหลเรียบ ลดความปั่นป่วน จำเป็นต่อการเกิดความดันต่ำเหนือปีก |
+
+### สูตรและตัวอย่าง / Formulas and examples
+
+```latex
+\rho = \frac{W}{V} \qquad SG = \frac{\rho_{substance}}{\rho_{water}} \qquad F = P \times A \qquad P = \frac{F}{A}
+```
+
+```latex
+A_{in} \times d_{in} = A_{out} \times d_{out} \qquad MA = \frac{F_{out}}{F_{in}}
+```
+
+- 5 lb บนลูกสูบ 1/2 in² → 10 psi → ลูกสูบ 5 in² ให้แรง 50 lb, MA = 10
+- ลูกสูบเข้า 1/4 in² ออก 15 in² แรงเข้า 50 lb ระยะ 30 in → 200 psi, แรงออก 3 000 lb, ระยะออก 1/2 in, MA = 60
+- ถ้าเพิ่มความดัน 100 psi ที่ด้านบนคอลัมน์น้ำ 8.34 psi → ก้นถังอ่าน 108.34 psi กลางถังอ่าน 104.17 psi
+- ภาชนะ 24 ft³ ใส่ของเหลว 1 497.6 lb → ความหนาแน่น 62.4 lb/ft³ (คือน้ำ)
+
+### Memory trick / เทคนิคจำ
+
+- **สามเหลี่ยม F-P-A**: F อยู่บน, P กับ A อยู่ล่าง ปิดตัวที่หา เช่น ปิด A เหลือ F ส่วน P = F ÷ P
+- Bernoulli: **"เร็ว = ดันต่ำ, ช้า = ดันสูง"** (คอ venturi แคบ = เร็ว = ความดันตก)
+- Pascal: **"แรงเล็กระยะไกล → แรงใหญ่ระยะสั้น"** เหมือนคันโยก ได้แรงเสียระยะ
+- Specific gravity: **"SG = ความหนาแน่นเทียบน้ำ"** น้ำ = 1 ถ้า SG < 1 ลอยน้ำ
+- น้ำกรดแบตเตอรี่: **"1.15 หมด, 1.275 ขึ้นไปเต็ม"** ตัวเลขมาก = กรดเข้มข้น = ประจุเต็ม
+- ปริมาตรเท่ากัน: **"ปริมาตรเข้า = ปริมาตรออก"** (พื้นที่ × ระยะ)
+
+### โจทย์ท้ายวัน / End-of-day practice
+
+1. ลูกสูบเข้า 2 in² แรง 100 lb ลูกสูบออก 20 in² ความดัน แรงออก และ MA เท่าใด? ถ้าลูกสูบเข้าเลื่อน 10 in ลูกสูบออกเลื่อนกี่ in? / Input piston 2 in² with 100 lb, output 20 in²: pressure, output force, MA, and output travel if the input moves 10 in?
+2. ของเหลว 12 ft³ หนัก 600 lb ความหนาแน่นและ specific gravity เท่าใด? / 12 ft³ of liquid weighs 600 lb: density and specific gravity?
+3. ทำไมคาร์บูเรเตอร์จึงดูดน้ำมันเข้ามาที่คอ venturi? / Why does a carburetor venturi draw fuel in?
+
+## Day 6 — Thermodynamics (หน้า 3.1–3.18)
+
+เป้าหมายวันนี้: แปลงสเกลอุณหภูมิ แยกเทอร์โมมิเตอร์แต่ละชนิด อธิบายการถ่ายเทความร้อน 3 แบบ ใช้กฎแก๊ส และเข้าใจวัฏจักรเครื่องยนต์กับระบบทำความเย็น / Goal: convert temperature scales, tell the thermometer types apart, explain the three heat-transfer modes, apply the gas laws, and understand engine cycles and refrigeration.
+
+| หัวข้อ / Topic | English (สรุป) | ไทย (อธิบาย) |
+| --- | --- | --- |
+| Heat | A form of energy, made by converting other energy (mechanical, electrical, chemical, radiant, nuclear). Compressing a gas heats it; expanding a gas cools it. | ความร้อนคือพลังงานรูปหนึ่งที่เกิดจากการแปลงพลังงานอื่น (กล, ไฟฟ้า, เคมี, รังสี, นิวเคลียร์) อัดแก๊สแล้วร้อนขึ้น ปล่อยให้ขยายแล้วเย็นลง |
+| Temperature scales | Celsius (0/100 for water), Fahrenheit (32/212), Kelvin = °C + 273, Rankine = °F + 460. | เซลเซียส (น้ำ 0/100) ฟาเรนไฮต์ (32/212) เคลวิน = °C + 273 แรงคิน = °F + 460 |
+| Thermal expansion | Solids lengthen when heated. A restrained part builds large forces, so design must allow for it. | ของแข็งยืดตัวเมื่อร้อน ถ้าถูกจำกัดจะเกิดแรงสูงมาก ต้องออกแบบเผื่อการขยายตัว |
+| Bimetallic thermometer | Two bonded metals expand differently; the coil winds or unwinds and moves the pointer (e.g. OAT gauge). | โลหะ 2 ชนิดติดกันขยายไม่เท่ากัน ขดลวดจึงบิดหรือคลายและขยับเข็ม (เช่น เกจวัดอุณหภูมิอากาศภายนอก OAT) |
+| Electrical resistance thermometer | Metal resistance rises with temperature. Bulb + indicator (Wheatstone bridge or ratiometer). Range about −70 to 150 °C. | ความต้านทานของโลหะเพิ่มตามอุณหภูมิ ประกอบด้วยหัววัดและมิเตอร์ (Wheatstone bridge หรือ ratiometer) ช่วงราว −70 ถึง 150 °C |
+| Thermocouple | Two unlike metals joined at a hot junction produce a voltage when heated. Used for CHT and turbine temperatures. The cold junction in the indicator is compensated by a bimetallic spring. | โลหะต่างชนิดต่อกันที่ hot junction เกิดแรงดันเมื่อร้อน ใช้วัด CHT และอุณหภูมิเทอร์ไบน์ ส่วน cold junction ในมิเตอร์ชดเชยด้วยสปริงไบเมทัลลิก |
+| Conduction | Heat moves by contact, high to low. Metals conduct well; liquids poorly; gases worst. Insulators block it. | ความร้อนส่งผ่านการสัมผัส จากสูงไปต่ำ โลหะนำดี ของเหลวนำไม่ดี แก๊สแย่ที่สุด ฉนวนกันความร้อน |
+| Convection | Heat carried by a moving fluid (gas or liquid). A fan or fins speed it up. | ความร้อนถูกพาไปกับของไหลที่เคลื่อนที่ (แก๊สหรือของเหลว) พัดลมหรือครีบช่วยเร่ง |
+| Radiation | Electromagnetic waves, at the speed of light, through a vacuum, in straight lines, without heating the medium they pass through. | คลื่นแม่เหล็กไฟฟ้า เร็วเท่าแสง ผ่านสุญญากาศได้ เดินทางเป็นเส้นตรง ผ่านตัวกลางได้โดยไม่ทำให้ตัวกลางร้อน |
+| Latent heat | Energy absorbed or released during a change of state at constant temperature. | พลังงานที่ดูดหรือปล่อยระหว่างเปลี่ยนสถานะโดยอุณหภูมิคงที่ |
+| 1st law | Energy is conserved. Change in internal energy = heat added − work done. No perpetual motion. | พลังงานคงที่ การเปลี่ยนแปลงพลังงานภายใน = ความร้อนที่เพิ่ม − งานที่ทำ ไม่มีเครื่องจักรกลนิรันดร์ |
+| 2nd law | Heat flows from hot to cold. Entropy (disorder) tends to increase. Explains heat and friction losses. | ความร้อนไหลจากร้อนไปเย็น เอนโทรปี (ความไม่เป็นระเบียบ) มีแนวโน้มเพิ่ม อธิบายการสูญเสียจากความร้อนและแรงเสียดทาน |
+| Gas laws | Boyle: P × V constant at constant T. Charles: V ∝ absolute T at constant P (and P ∝ T at constant V). General: P1V1/T1 = P2V2/T2. Dalton: total pressure = sum of partial pressures. | บอยล์: P × V คงที่เมื่อ T คงที่ ชาร์ลส์: V ∝ T สัมบูรณ์เมื่อ P คงที่ (และ P ∝ T เมื่อ V คงที่) กฎรวม: P1V1/T1 = P2V2/T2 ดาลตัน: ความดันรวม = ผลรวมความดันย่อย |
+| Constant-volume cycle | Piston engine: intake, compression, combustion at constant volume (pressure jumps), power, exhaust. Area on the P-V graph = work. | เครื่องยนต์ลูกสูบ: ดูด อัด เผาไหม้ที่ปริมาตรคงที่ (ความดันพุ่ง) ขยายตัว คาย พื้นที่ใต้กราฟ P-V = งาน |
+| Constant-pressure cycle | Gas turbine: combustion at nearly constant pressure with a big rise in volume; the turbine turns it to mechanical energy and the nozzle to velocity, giving thrust by reaction. | เทอร์ไบน์แก๊ส: เผาไหม้ที่ความดันเกือบคงที่ ปริมาตรเพิ่มมาก เทอร์ไบน์แปลงเป็นพลังงานกล หัวฉีดแปลงเป็นความเร็ว เกิดแรงขับจากปฏิกิริยา |
+| Heat of combustion / thermal energy | Heat of combustion: energy released burning a fuel (MJ/kg or BTU/lb). Thermal energy is the total molecular motion in a body and is not the same as temperature. | Heat of combustion: พลังงานที่ปล่อยจากการเผาเชื้อเพลิง (MJ/kg หรือ BTU/lb) Thermal energy: พลังงานการเคลื่อนที่ของโมเลกุลทั้งก้อน ไม่เหมือนอุณหภูมิ |
+| Thermal efficiency | Piston engines convert only about 34% of fuel heat to work. Higher compression ratio helps but raises head temperature and risks detonation. | เครื่องยนต์ลูกสูบแปลงความร้อนเป็นงานได้ประมาณ 34% เพิ่มอัตราส่วนกำลังอัดช่วยได้แต่เพิ่มอุณหภูมิหัวสูบและเสี่ยงเกิดดีโทเนชัน |
+| Refrigeration / heat pump | Vapor-cycle air conditioning: the refrigerant boils at a very low temperature, absorbs cabin heat, and releases it elsewhere. A heat pump moves heat and is usually reversible. | แอร์แบบวัฏจักรไอ: สารทำความเย็นเดือดที่อุณหภูมิต่ำมาก ดูดความร้อนจากห้องโดยสารแล้วปล่อยออกที่อื่น ฮีตปั๊มย้ายความร้อนและมักกลับทิศได้ |
+
+### สูตรและตัวอย่าง / Formulas and examples
+
+```latex
+^\circ F = 1.8\,^\circ C + 32 \qquad ^\circ C = (^\circ F - 32)\times\tfrac{5}{9} \qquad K = {}^\circ C + 273 \qquad R = {}^\circ F + 460
+```
+
+```latex
+P_1V_1 = P_2V_2 \qquad \frac{P_1}{T_1}=\frac{P_2}{T_2} \qquad \frac{P_1V_1}{T_1}=\frac{P_2V_2}{T_2} \qquad \text{(absolute P and T)}
+```
+
+- ไนโตรเจน 10 ft³ ที่ 500 psia บีบเหลือ 7 ft³ → 714.29 psia
+- ถังออกซิเจน 750 psig ที่ 70 °F ถูกแดดเป็น 140 °F → (764.7 × 600) ÷ 530 = 865.7 psia ≈ 851 psig
+- เครื่องยนต์ 85 bhp ใช้เชื้อเพลิง 50 lb (18 800 BTU/lb) ใน 1 ชั่วโมง → brake thermal efficiency ≈ 0.23 หรือ 23%
+
+หมายเหตุ: หนังสือเรียกความร้อนที่ปล่อยตอนควบแน่นว่า latent heat of fusion แต่ฟิสิกส์ทั่วไปเรียก latent heat of vaporization (fusion = ของแข็งกับของเหลว) หากข้อสอบถามด้วยถ้อยคำของหนังสือให้อ่านโจทย์ให้ละเอียด / the book calls the heat released on condensing "latent heat of fusion"; standard physics calls it latent heat of vaporization (fusion = solid-liquid). Read the exam wording carefully.
+
+### Memory trick / เทคนิคจำ
+
+- **−40 คือจุดที่ °C = °F** ใช้เช็กผลแปลงหน่วยได้ทุกครั้ง
+- จุดเยือกแข็ง/เดือดของน้ำ: **0/100 °C = 32/212 °F = 273/373 K = 492/672 R** (K = C + 273, R = F + 460)
+- การถ่ายเทความร้อน **"สัมผัส – พา – ส่อง"** = Conduction (touch) – Convection (carry) – Radiation (ray)
+- บอยล์ **"อัดแล้วเล็ก"** (T คงที่ P↑ V↓) ชาร์ลส์ **"ร้อนแล้วขยาย"** (P คงที่ T↑ V↑)
+- กฎแก๊สต้องใช้ **"สัมบูรณ์เสมอ"**: psia = psig + 14.7 และ K หรือ R ห้ามใช้ °C/°F ตรง ๆ
+- กฎข้อ 1 **"พลังงานไม่หาย แค่เปลี่ยนร่าง"**, กฎข้อ 2 **"ร้อนไหลไปเย็นเอง ย้อนกลับต้องออกแรง"** (ตู้เย็นจึงต้องมีคอมเพรสเซอร์)
+- วัฏจักร: **"ลูกสูบ = Volume คงที่, เจ็ต = Pressure คงที่"**
+- เทอร์โมคัปเปิล: **"เจ็ตใช้ Chromel–Alumel วัด EGT, ลูกสูบใช้ Iron–Constantan วัด CHT"**
+- เปลี่ยนสถานะ: **"ละลาย/เดือดไม่ร้อนขึ้น"** อุณหภูมิแบนราบจนกว่าจะเปลี่ยนเสร็จ
+
+### โจทย์ท้ายวัน / End-of-day practice
+
+1. 86 °F เท่ากับกี่ °C และกี่ K? / Convert 86 °F to °C and K.
+2. แก๊ส 20 ft³ ที่ 100 psia ถูกอัดเหลือ 10 ft³ ที่อุณหภูมิคงที่ ความดันใหม่? / 20 ft³ of gas at 100 psia compressed to 10 ft³ at constant temperature: new pressure?
+3. ถังอากาศ 600 psig ที่ 60 °F ถูกความร้อนเป็น 120 °F (ปริมาตรคงที่) อ่านค่าได้กี่ psig? / A 600 psig cylinder at 60 °F heated to 120 °F at constant volume: new gauge pressure?
+
+## Day 7 — Optics + Wave Motion and Sound (หน้า 4.1–4.7, 5.1–5.5) + ทบทวนรวม
+
+เป้าหมายวันนี้: อธิบายธรรมชาติของแสง การสะท้อน การหักเห ใยแก้วนำแสง คลื่นกลและเสียง แล้วใช้เวลาครึ่งหลังทบทวนทั้งเล่ม / Goal: explain light, reflection, refraction, fibre optics, waves and sound, then spend the second half reviewing the whole module.
+
+### ส่วนที่ 1: Optics (แสง) — ประมาณ 45 นาที
+
+| หัวข้อ / Topic | English (สรุป) | ไทย (อธิบาย) |
+| --- | --- | --- |
+| Nature of light | Electromagnetic radiation, a wave. Speed in vacuum c = 299 792 458 m/s (186 282 mi/s). c = frequency × wavelength. | รังสีแม่เหล็กไฟฟ้า เป็นคลื่น ความเร็วในสุญญากาศ c = 299 792 458 m/s (186 282 ไมล์/วินาที) c = ความถี่ × ความยาวคลื่น |
+| Visible colours | Violet about 4 500 Å, blue 4 800, green 5 200, yellow 5 800, orange 6 000, red 6 400 (1 Å = 10⁻¹⁰ m). Red is longest, violet shortest. | ม่วงราว 4 500 Å, น้ำเงิน 4 800, เขียว 5 200, เหลือง 5 800, ส้ม 6 000, แดง 6 400 (1 Å = 10⁻¹⁰ ม.) แดงยาวสุด ม่วงสั้นสุด |
+| Refractive index | n = c ÷ v. Air 1.000 29, water 1.33, glass about 1.6. Light is slower in denser media. | n = c ÷ v อากาศ 1.000 29, น้ำ 1.33, แก้วประมาณ 1.6 แสงช้าลงในตัวกลางที่หนาแน่นกว่า |
+| Reflection | Incident ray, reflected ray and normal lie in one plane, rays on opposite sides of the normal. A flat surface gives a mirror image. | รังสีตกกระทบ รังสีสะท้อน และเส้นปกติอยู่ในระนาบเดียวกัน รังสีอยู่คนละด้านของเส้นปกติ ผิวเรียบให้ภาพเสมือนในกระจก |
+| Curved mirrors | Convex: spreads light, smaller image, wider view (car side mirror). Concave: focuses light, magnifies (telescope, make-up mirror). | กระจกนูน: กระจายแสง ภาพเล็ก มุมมองกว้าง (กระจกข้างรถ) กระจกเว้า: รวมแสง ขยายภาพ (กล้องโทรทรรศน์ กระจกแต่งหน้า) |
+| Refraction | Light bends when its speed changes between media. Entering a slower medium, it bends toward the normal; frequency stays the same, wavelength shrinks. | แสงหักเหเมื่อความเร็วเปลี่ยนตามตัวกลาง เข้าตัวกลางที่ช้ากว่าจะหักเข้าหาเส้นปกติ ความถี่เท่าเดิม ความยาวคลื่นสั้นลง |
+| Lenses | Shapes include biconvex, plano-convex, meniscus, plano-concave, biconcave. | เลนส์มีหลายรูปทรง เช่น นูนสองด้าน นูนด้านเดียว เมนิสคัส เว้าด้านเดียว เว้าสองด้าน |
+| Fibre structure | Core carries the light; reflective cladding keeps it inside (rays beyond the critical angle reflect fully). Buffer and jacket protect it. Avoid bends tighter than about 30 mm radius. | แกนนำแสง ชั้น cladding สะท้อนแสงให้อยู่ในแกน (มุมเกินมุมวิกฤตสะท้อนหมด) buffer และ jacket ปกป้อง ห้ามโค้งรัศมีเล็กกว่าราว 30 มม. |
+| Fibre modes | Single-mode: tiny core, one signal at a time, near infrared. Multi-mode: core over 10 µm, several paths. | Single-mode: แกนเล็ก ส่งสัญญาณทีละหนึ่ง ใกล้อินฟราเรด Multi-mode: แกนเกิน 10 µm หลายเส้นทาง |
+| Attenuation | Loss of light intensity along the fibre from scattering and absorption. Most loss happens at splices and connectors. | การสูญเสียความเข้มแสงตามความยาวเส้นใยจากการกระเจิงและการดูดกลืน สูญเสียมากสุดที่จุดต่อและขั้วต่อ |
+| Splicing | Fusion splice: loss typically under 0.1 dB, stronger. Mechanical splice: quicker, more loss, less robust. | Fusion: สูญเสียน้อยกว่า 0.1 dB แข็งแรงกว่า Mechanical: เร็วกว่า แต่สูญเสียมากและทนน้อยกว่า |
+| Data link | Transmitter (LED or laser diode) → fibre → receiver. Pros: bandwidth, light weight, no EMI, no crosstalk, no sparks. Cons: cost, connector reliability. | ตัวส่ง (LED หรือเลเซอร์ไดโอด) → เส้นใย → ตัวรับ ข้อดี: แบนด์วิดท์สูง เบา ไม่โดนรบกวนแม่เหล็กไฟฟ้า ไม่มี crosstalk ไม่มีประกายไฟ ข้อเสีย: ราคา และความน่าเชื่อถือของขั้วต่อ |
+
+หมายเหตุ: เฉลยข้อ 4-1 ท้ายบทในหนังสือเขียนกลับด้าน (ความเร็วในสาร ÷ ความเร็วในสุญญากาศ) แต่เนื้อหาในบทกำหนด n = c ÷ v ซึ่งให้ค่า ≥ 1 ถูกต้องตามฟิสิกส์ / the book's answer 4-1 inverts the ratio; the chapter text defines n = c ÷ v, which is the correct form (n ≥ 1).
+
+### ส่วนที่ 2: Wave Motion and Sound (คลื่นและเสียง) — ประมาณ 30 นาที
+
+| หัวข้อ / Topic | English (สรุป) | ไทย (อธิบาย) |
+| --- | --- | --- |
+| Sound needs 3 things | Source, medium, detector. | ต้องมี 3 อย่าง: แหล่งกำเนิด ตัวกลาง และตัวรับ |
+| Wave types | Transverse (water, light): motion at right angles to travel. Longitudinal (sound): particles move back and forth along the travel direction. | คลื่นตามขวาง (น้ำ แสง): การสั่นตั้งฉากกับทิศทางเดินทาง คลื่นตามยาว (เสียง): อนุภาคสั่นไปมาตามทิศทางเดินทาง |
+| Wavelength | Distance from one crest to the next. | ระยะจากยอดคลื่นหนึ่งถึงยอดถัดไป |
+| Interference | In phase = louder; out of phase = partial cancelling. Noise-cancelling headphones add an opposite-phase wave. | เฟสตรงกัน = ดังขึ้น เฟสตรงข้าม = หักล้าง หูฟังตัดเสียงสร้างคลื่นเฟสตรงข้ามมาลบ |
+| Standing waves | A wave reflected from a boundary combines with the original wave. | คลื่นสะท้อนจากขอบเขตรวมกับคลื่นเดิมเกิดเป็นคลื่นนิ่ง |
+| Speed of sound | Depends on the medium's density and elasticity. Faster in water than air. Exception: aluminium 16 700 ft/s vs lead 4 030 ft/s at 20 °C. | ขึ้นกับความหนาแน่นและความยืดหยุ่นของตัวกลาง เร็วในน้ำมากกว่าอากาศ ข้อยกเว้น: อลูมิเนียม 16 700 ft/s ตะกั่ว 4 030 ft/s ที่ 20 °C |
+| Intensity and loudness | Intensity ∝ (pressure variation)². Amplitude sets loudness; frequency sets pitch. Measured in decibels. | ความเข้ม ∝ (ความดันที่เปลี่ยน)² แอมพลิจูดกำหนดความดัง ความถี่กำหนดระดับเสียงสูงต่ำ วัดเป็นเดซิเบล |
+| Typical levels | Whisper 20 dB; pneumatic drill 80 dB; jet engine at take-off, 150 ft away: 90 dB. | กระซิบ 20 dB; สว่านลม 80 dB; เครื่องยนต์เจ็ตตอนขึ้นบินที่ 150 ฟุต 90 dB |
+| Doppler effect | Approaching source: higher pitch, louder. Receding: lower pitch, quieter. | แหล่งเสียงเข้าใกล้: แหลมและดังขึ้น เคลื่อนออก: ทุ้มและเบาลง |
+| Mach number | Aircraft speed ÷ speed of sound. | ความเร็วอากาศยาน ÷ ความเร็วเสียง |
+
+### Memory trick / เทคนิคจำ
+
+- สีและความยาวคลื่น: **"ม่วงสั้น แดงยาว"** (ROYGBIV เรียงจากยาวไปสั้น)
+- **n = c ÷ v: "c อยู่บน"** n จึงไม่มีวันต่ำกว่า 1
+- แสงเข้าตัวกลางที่ช้ากว่า: **"ช้าลง = เข้าหาเส้นปกติ"**
+- กระจก: **"นูน = กว้าง (กระจกข้างรถ), เว้า = ขยาย (แต่งหน้า)"**
+- Fibre: **"Single = เส้นเดียว แกนเล็ก สัญญาณเดียว"** ส่วน Multi แกนใหญ่
+- Splice: **"Fusion = หลอมติด แน่นและเสียน้อย"**
+- คลื่น: **"Transverse = ตั้งฉาก (น้ำ) / Longitudinal = ตามยาว (เสียง)"**
+- Doppler: **"เข้า = แหลม+ดัง, ออก = ทุ้ม+เบา"**
+- Mach: **"V ÷ a"** ความเร็วของเรา หารด้วยความเร็วเสียง
+
+### โจทย์ท้ายวัน / End-of-day practice
+
+1. แสงในน้ำ (n = 1.33) เดินทางด้วยความเร็วเท่าใด? / Speed of light in water (n = 1.33)?
+2. แสงเขียว 5 200 Å มีความถี่เท่าใด? / Frequency of 5 200 Å green light?
+3. เครื่องบินบิน 600 mph เมื่อความเร็วเสียง 760 mph คือ Mach เท่าใด? / An aircraft at 600 mph where sound travels 760 mph: Mach number?
+
+### ส่วนที่ 3: ทบทวนรวม 10 ข้อที่ต้องจำให้ได้ — ประมาณ 30 นาที
+
+1. ความเค้น 5 แบบ และ strain คืออะไร / The five stresses and what strain is
+2. Archimedes: แรงลอยตัว = ปริมาตร × ความหนาแน่นของของไหล / Buoyant force = volume × fluid density
+3. 14.7 psi = 29.92 inHg = 760 mmHg
+4. กฎนิวตัน 3 ข้อ และสูตรแรงขับ / Newton's three laws and the thrust formula
+5. คาน 3 ชั้น F-R-E และ MA ของรอก เฟือง ทางเอียง / Lever classes and MA of pulleys, gears, inclined planes
+6. KE = ½mv², PE = Wh, งาน = F×d, กำลัง 1 hp = 550 ft-lb/s, torque = hp×5252÷rpm
+7. Pascal: F = P×A และปริมาตรเข้า = ออก / Pascal and volume in = volume out
+8. Bernoulli: เร็ว = ดันต่ำ (venturi, คาร์บูเรเตอร์, ปีก)
+9. กฎแก๊สใช้ค่าสัมบูรณ์ (psia, K, R) และกฎอุณหพลศาสตร์ข้อ 1–2 / Gas laws use absolute values; the 1st and 2nd laws
+10. Fibre optics: ข้อดี ข้อเสีย single/multi-mode fusion/mechanical และ Doppler/Mach
+
+## Cheat Sheet — สูตรและ trick จำ / Formulas and Memory Tricks
+
+ใช้ทบทวนวันที่ 7 หรือก่อนเข้าห้องสอบ / Use on Day 7 or just before the exam.
+
+| หัวข้อ / Topic | สูตร / ค่าที่ต้องจำ (Formula / Key value) | Trick จำ |
+| --- | --- | --- |
+| Electron shells | 2, 8, 18, 32, 50 (= 2n²) | 2n² |
+| Stresses | Tension, Compression, Torsion, Shear, Bending | ดึง-อัด-บิด-เฉือน-งอ |
+| Buoyancy | F = V × ρ(fluid); water 62.4 lb/ft³ | แรงลอยตัว vs น้ำหนัก |
+| Pressure | 14.7 psi = 29.92 inHg = 760 mmHg; water 8.34 psi per 231 in | 14.7 → 29.92 → 760 |
+| Unit conversion | 1 mph = 1.467 ft/s; g = 32.2 ft/s² | 60 mph = 88 ft/s |
+| Acceleration | a = (Vf − Vi) ÷ t | เร่ง = เปลี่ยนความเร็ว ÷ เวลา |
+| Newton 2 (thrust) | F = W(Vf − Vi) ÷ (g·t) | นิ่ง / แรง / คู่ = 1-2-3 |
+| Centripetal force | F = m·v² ÷ r | Centri-petal = หาศูนย์กลาง |
+| Pendulum | T = 2π√(L/g) | ยาว → ช้า |
+| Lever | E × L = R × l | F-R-E = 1-2-3 |
+| Block and tackle | MA = number of supporting ropes | นับเชือกที่แบก |
+| Gears | Gear reduction = driven teeth ÷ drive teeth; planetary = ring ÷ sun | ฟันมาก = ช้า |
+| Inclined plane | MA = length ÷ height | ยาวกว่า = ออกแรงน้อยกว่า |
+| Energy | PE = W × h; KE = ½(W/g)v² | v ×2 → KE ×4 |
+| Work / power | Work = F × d; 1 hp = 550 ft-lb/s = 33 000 ft-lb/min = 746 W | 550 / 33 000 / 746 |
+| Torque | T = F × d; T(lb-ft) = hp × 5 252 ÷ rpm | ห้า-สอง-ห้า-สอง |
+| Friction | F = μ × N; starting > sliding > rolling | เริ่ม > ไถล > กลิ้ง |
+| Impulse | F × t = m·Δv | แรง × เวลา = เปลี่ยนโมเมนตัม |
+| Gyro | Rigidity: heavy, fast, mass at rim, low friction; precession acts 90° away | หนัก-เร็ว-ริมขอบ-ฝืดน้อย |
+| Density / SG | ρ = W ÷ V; SG = ρ ÷ ρ(water); battery 1.150 (flat) – 1.275–1.310 (full) | SG ไม่มีหน่วย |
+| Pascal | F = P × A; A_in × d_in = A_out × d_out | F-P-A สามเหลี่ยม |
+| Bernoulli | Faster flow = lower static pressure | เร็ว = ดันต่ำ |
+| Temperature | °F = 1.8°C + 32; K = °C + 273; R = °F + 460 | −40 °C = −40 °F |
+| Heat transfer | Conduction, convection, radiation | สัมผัส – พา – ส่อง |
+| Gas laws | P1V1 = P2V2; P1/T1 = P2/T2; P1V1/T1 = P2V2/T2 (absolute) | บอยล์ = อัดแล้วเล็ก, ชาร์ลส์ = ร้อนแล้วขยาย |
+| Thermodynamics | 1st: energy conserved; 2nd: heat flows hot → cold | ไม่หาย / ไหลลงเอง |
+| Engine cycles | Piston = constant volume; gas turbine = constant pressure | ลูกสูบ V คงที่, เจ็ต P คงที่ |
+| Light | c = fλ; n = c ÷ v; 1 Å = 10⁻¹⁰ m | ม่วงสั้น แดงยาว |
+| Fibre optics | Single-mode vs multi-mode; fusion < 0.1 dB loss | Fusion = หลอมติด |
+| Sound | Source + medium + detector; Mach = V ÷ a | เข้า = แหลม, ออก = ทุ้ม |
+
+## Self-test — เฉลยโจทย์ท้ายวัน / Practice Answers
+
+| วัน / Day | ข้อ / No. | เฉลย / Answer |
+| --- | --- | --- |
+| 1 | 1 | 462 ÷ 231 × 8.34 = 16.68 psi |
+| 1 | 2 | 5 × 62.4 = 312 lb < 400 lb → จม / sinks (น้ำหนักใต้น้ำ 88 lb / apparent weight 88 lb) |
+| 1 | 3 | ความดันบรรยากาศต่ำลง จุดเดือดจึงต่ำลง (หนังสือ: 10 psi → 194 °F, 14.7 psi → 212 °F, 20 psi → 226 °F) / lower pressure, lower boiling point |
+| 2 | 1 | 150 ÷ 30 = 5 mph/s × 1.467 = 7.34 ft/s² ≈ 0.23 G |
+| 2 | 2 | F = 200 × (1 000 − 200) ÷ 32.2 ≈ 4 969 lb |
+| 2 | 3 | คาบ ∝ √L → ยาว 4 เท่า คาบเป็น 2 เท่า / period doubles |
+| 3 | 1 | E × 48 = 240 × 8 → E = 40 lb |
+| 3 | 2 | 300 ÷ 6 = 50 lb |
+| 3 | 3 | 36 × 90 ÷ 12 = 270 rpm |
+| 4 | 1 | 60 000 × 2 = 120 000 ft-lb |
+| 4 | 2 | 3 300 × 10 ÷ 1 min = 33 000 ft-lb/min = 1 hp |
+| 4 | 3 | 200 × 5 252 ÷ 2 500 ≈ 420 lb-ft |
+| 5 | 1 | P = 100 ÷ 2 = 50 psi; F_out = 50 × 20 = 1 000 lb; MA = 10; ระยะออก = 2 × 10 ÷ 20 = 1 in |
+| 5 | 2 | ρ = 600 ÷ 12 = 50 lb/ft³; SG = 50 ÷ 62.4 ≈ 0.80 |
+| 5 | 3 | อากาศเร่งในคอ venturi ความดันสถิตลดต่ำกว่าถังน้ำมัน น้ำมันจึงถูกดันเข้าสู่กระแสอากาศ / air speeds up, static pressure drops below the fuel bowl pressure, fuel flows in |
+| 6 | 1 | (86 − 32) × 5/9 = 30 °C; K = 303 |
+| 6 | 2 | P2 = 100 × 20 ÷ 10 = 200 psia |
+| 6 | 3 | P1 = 614.7 psia; T1 = 520 R; T2 = 580 R → P2 = 614.7 × 580 ÷ 520 ≈ 685.6 psia ≈ 670.9 psig |
+| 7 | 1 | v = 299 792 458 ÷ 1.33 ≈ 2.25 × 10⁸ m/s |
+| 7 | 2 | λ = 5.2 × 10⁻⁷ m → f = c ÷ λ ≈ 5.77 × 10¹⁴ Hz |
+| 7 | 3 | 600 ÷ 760 ≈ Mach 0.79 |
+
+## คำถามท้ายบทในหนังสือ (สรุปเป็นถ้อยคำของเรา) / Book End-of-Chapter Questions
+
+| บท / Chapter | คำถาม (ย่อ) / Question (short) | คำตอบ / Answer |
+| --- | --- | --- |
+| 1 | Matter and its 4 states | ทุกสิ่งที่มีมวลและครองที่ว่าง; solid, liquid, gas, plasma |
+| 1 | 2 properties set by valence electrons | การสร้างพันธะเคมี และการนำไฟฟ้า / chemical bonding and conductivity |
+| 1 | Compound vs mixture | Compound มีพันธะเคมี, mixture ไม่มี |
+| 2 | What is force | อิทธิพลที่เปลี่ยนการเคลื่อนที่ของวัตถุ หรือก่อความเค้นในวัตถุนิ่ง / influence that changes motion or produces stress |
+| 2 | Five stresses | Tension, compression, torsion, shear, bending |
+| 2 | Force has magnitude and ___ | Direction / ทิศทาง |
+| 2 | What causes atmospheric pressure | น้ำหนักของอากาศเหนือจุดที่วัด / weight of the air above |
+| 2 | F = ma gives | Thrust (ในบริบทของหนังสือ / in the book's context) |
+| 2 | Pendulum: what stays constant as the swing shrinks | Period / คาบ |
+| 2 | Device that accomplishes work | Machine / เครื่องกล |
+| 2 | Gear with a spiral rod meshing a spur gear | Worm gear |
+| 3 | Thermodynamics deals with heat and ___ | Other forms of energy / พลังงานรูปอื่น |
+| 3 | Heat units | Imperial: BTU, calorie; SI: joule, calorie |
+| 3 | Resistance thermometer principle | ความต้านทานเปลี่ยนตามอุณหภูมิ / resistance changes with temperature |
+| 3 | 3 heat transfer modes | Conduction, convection, radiation |
+| 3 | 2nd law | Heat flows from hot to cold / ร้อน → เย็น |
+| 3 | General gas law variables | Temperature, pressure, volume |
+| 3 | Theoretical heat released burning fuel | Heat of combustion |
+| 3 | Adding heat always raises temperature? | จริงบางกรณี (ไม่จริงตอนเปลี่ยนสถานะ) / true some of the time |
+| 4 | Refractive index | n = c ÷ v (ดูหมายเหตุวัน 7 / see Day 7 note) |
+| 4 | Light changing direction in a medium | Refraction / การหักเห |
+| 4 | 3 fibre advantages | Wide bandwidth, light weight, immune to EMI |
+| 4 | What keeps light in the fibre | Reflective cladding |
+| 4 | 2 advantages of fusion splicing | Less optical loss, stronger splice |
+| 4 | Where most light is lost | At splice joints and connectors |
+| 5 | 3 elements for sound | Source, medium, detector |
+| 5 | Amplitude determines | Loudness / ความดัง |
+| 5 | Aircraft speed ÷ speed of sound | Mach number |
+</script>
+
+<script>
+(function(){
+"use strict";
+/* ===== Question bank: [topic, stem, correct, wrong1, wrong2, explanation] ===== */
+var BANK = [
+["matter","The atomic number of an element is the number of:","protons in the nucleus","neutrons in the nucleus","electrons in the valence shell","เลขอะตอม = จำนวนโปรตอน เป็นตัวกำหนดว่าเป็นธาตุอะไร"],
+["matter","Which state of matter is compressible and takes the shape of its container?","Gas","Liquid","Solid","แก๊สอัดได้และเปลี่ยนรูปตามภาชนะ ส่วนของเหลวอัดแทบไม่ได้"],
+["matter","An atom with a full valence shell is normally:","a good insulator","a good conductor","radioactive","ชั้นนอกเต็ม = เสถียร อิเล็กตรอนไม่หลุดง่าย จึงเป็นฉนวน"],
+["matter","A substance that speeds up a chemical reaction without being used up is a:","catalyst","inhibitor","isotope","catalyst เร่งปฏิกิริยา ส่วน inhibitor คือตัวหน่วง"],
+["matter","Which hydrogen isotope is radioactive?","Tritium","Deuterium","Protium","Tritium (นิวตรอน 2 ตัว) กัมมันตรังสี อีกสองตัวเสถียร"],
+["matter","What is the maximum number of electrons in the second shell?","8","2","18","ชั้น 1 = 2, ชั้น 2 = 8, ชั้น 3 = 18 (สูตร 2n²)"],
+["matter","When atoms of different elements bond chemically, the result is a:","compound","mixture","isotope","compound มีพันธะเคมี ต่างจาก mixture ที่ไม่มีพันธะ"],
+["mech","The stress that resists a force tending to twist a part is:","torsion","shear","compression","torsion = ต้านการบิด"],
+["mech","Bending stress is a combination of:","tension and compression","shear and torsion","tension and torsion","ด้านนอกของส่วนโค้งถูกดึง ด้านในถูกอัด"],
+["mech","An 8 ft³ object is fully submerged in fresh water (62.4 lb/ft³). The buoyant force is:","499.2 lb","62.4 lb","7.8 lb","แรงลอยตัว = V × ความหนาแน่นของของไหล = 8 × 62.4 = 499.2 lb"],
+["mech","Standard sea-level atmospheric pressure is:","29.92 inHg","14.7 inHg","760 psi","14.7 psi = 29.92 inHg = 760 mmHg"],
+["mech","The pressure at the bottom of a column of liquid depends on:","the height of the column","the shape of the container","the total volume of liquid","ความดันขึ้นกับความสูงของคอลัมน์เท่านั้น"],
+["mech","Total pressure is the sum of:","static pressure and ram pressure","static pressure and absolute pressure","ram pressure and gauge pressure","ความดันรวม = ความดันสถิต + ram"],
+["mech","Velocity differs from speed because velocity includes:","direction","acceleration","time","velocity เป็นเวกเตอร์ มีทิศทาง"],
+["mech","An aircraft accelerates uniformly from 300 mph to 900 mph in 30 seconds. The acceleration is:","20 mph per second","30 mph per second","10 mph per second","(900 − 300) ÷ 30 = 20 mph/s"],
+["mech","The thrust of a jet engine is best explained by Newton's:","third law","first law","law of gravitation","แรงขับคือแรงปฏิกิริยาจากอากาศที่ถูกเร่งออกท้ายเครื่อง"],
+["mech","If the mass of an object in circular motion doubles (same speed and radius), the centripetal force:","doubles","halves","stays the same","F = m·v²/r เป็นสัดส่วนตรงกับมวล"],
+["mech","If the radius of a circular path is halved (same mass and speed), the centripetal force:","doubles","halves","quadruples","F แปรผกผันกับ r ลดรัศมีครึ่งหนึ่ง แรงเป็น 2 เท่า"],
+["mech","As the swing of a pendulum gradually gets smaller, its period:","remains the same","increases","decreases","คาบขึ้นกับความยาวและ g ไม่ขึ้นกับระยะแกว่ง"],
+["mech","Resonance occurs when:","the applied frequency equals the natural frequency","the applied frequency is double the natural frequency","damping is at its maximum","ความถี่ที่มากระตุ้นตรงกับความถี่ธรรมชาติ"],
+["mech","A lever has an effort arm of 40 in and a resistance of 200 lb acting 10 in from the fulcrum. The effort needed is:","50 lb","800 lb","20 lb","E × 40 = 200 × 10 → E = 50 lb"],
+["mech","In which lever class is the effort applied between the fulcrum and the resistance?","Third class","First class","Second class","ชั้น 3 คือแรงอยู่ตรงกลาง (F-R-E = 1-2-3)"],
+["mech","A block and tackle has 5 supporting strands and lifts 500 lb. The effort needed (ignoring friction) is:","100 lb","250 lb","2 500 lb","MA = 5 → 500 ÷ 5 = 100 lb"],
+["mech","A 40-tooth gear drives a 10-tooth gear. Compared with the large gear, the small gear turns:","4 times faster","4 times slower","at the same speed","ฟันน้อยกว่า 4 เท่า จึงหมุนเร็วกว่า 4 เท่า"],
+["mech","A planetary reduction gear has a sun gear of 30 teeth and a ring gear of 90 teeth. The reduction ratio (ring ÷ sun) is:","3 : 1","0.33 : 1","60 : 1","90 ÷ 30 = 3"],
+["mech","An inclined plane is 20 ft long and 4 ft high. Its mechanical advantage is:","5","0.2","16","MA = ความยาว ÷ ความสูง = 20 ÷ 4 = 5"],
+["mech","The efficiency of a real machine is always:","less than 100%","equal to 100%","greater than 100%","มีแรงเสียดทานและความร้อนสูญเสียเสมอ"],
+["mech","An aircraft weighs 6 440 lb. Its mass is:","200 slugs","6 440 slugs","207 368 slugs","มวล = น้ำหนัก ÷ g = 6 440 ÷ 32.2 = 200 slugs"],
+["mech","The potential energy of a 2 000 lb engine raised 5 ft is:","10 000 ft-lb","400 ft-lb","2 005 ft-lb","PE = W × h = 2 000 × 5"],
+["mech","If the speed of a moving object doubles, its kinetic energy:","becomes four times greater","doubles","becomes eight times greater","KE ∝ v² ความเร็ว 2 เท่า พลังงานจลน์ 4 เท่า"],
+["mech","A force of 50 lb moves an object 30 ft in the direction of the force. The work done is:","1 500 ft-lb","80 ft-lb","0.6 ft-lb","งาน = F × d = 50 × 30"],
+["mech","6 600 lb is raised 10 ft in 1 minute. The power required is:","2 hp","1 hp","4 hp","66 000 ft-lb/min ÷ 33 000 = 2 hp"],
+["mech","An engine produces 270 hp at 2 700 rpm. The torque is approximately:","525 lb-ft","5 252 lb-ft","52.5 lb-ft","270 × 5 252 ÷ 2 700 = 525 lb-ft"],
+["mech","Compared with sliding friction, starting (static) friction is:","greater","smaller","the same","ตอนเริ่มเคลื่อนต้องใช้แรงมากกว่าตอนเคลื่อนอยู่"],
+["mech","The coefficient of friction is 0.25 and the normal force is 80 lb. The friction force is:","20 lb","320 lb","0.003 lb","F = μ × N = 0.25 × 80 = 20 lb"],
+["mech","Impulse is equal to the:","change in momentum","change in kinetic energy","force multiplied by distance","impulse = F × t = Δ(m·v)"],
+["mech","Gyroscopic rigidity is increased by:","higher rotor speed","a lighter rotor","mass concentrated near the axis","หมุนเร็ว หนัก มวลอยู่ริมขอบ ลูกปืนฝืดน้อย ยิ่งแข็ง"],
+["mech","Gyroscopic precession acts:","at 90° to the applied force, in the direction of rotation","in line with the applied force","in the opposite direction to the applied force","แรงไปปรากฏผลที่ตำแหน่งถัดไป 90° ตามทิศการหมุน"],
+["mech","12 ft³ of liquid weighs 540 lb. The density is:","45 lb/ft³","6 480 lb/ft³","0.022 lb/ft³","ความหนาแน่น = น้ำหนัก ÷ ปริมาตร = 540 ÷ 12"],
+["mech","A liquid has a density of 45 lb/ft³ (water = 62.4 lb/ft³). Its specific gravity is approximately:","0.72","1.39","45","SG = 45 ÷ 62.4 = 0.72"],
+["mech","A 10 lb force acts on a 2 in² input piston. The output piston area is 20 in². The output force is:","100 lb","50 lb","200 lb","P = 10 ÷ 2 = 5 psi; F = 5 × 20 = 100 lb"],
+["mech","In a hydraulic system with a 2 in² input piston and a 20 in² output piston, when the input piston moves 10 in the output piston moves:","1 in","10 in","100 in","ปริมาตรเข้า = ออก: 2 × 10 = 20 × d → d = 1 in"],
+["mech","According to Bernoulli's principle, where the velocity of a fluid increases, the static pressure:","decreases","increases","stays the same","เร็วขึ้น ความดันสถิตลดลง"],
+["mech","In a venturi, the throat has:","the highest velocity and the lowest static pressure","the lowest velocity and the highest static pressure","the highest velocity and the highest static pressure","คอแคบ = เร็ว = ความดันต่ำ"],
+["mech","A hydrometer is used to measure the:","specific gravity of a liquid","viscosity of a liquid","temperature of a liquid","hydrometer วัด specific gravity เช่นน้ำกรดแบตเตอรี่"],
+["mech","The specific gravity of the electrolyte in a fully charged lead-acid battery is approximately:","1.275 to 1.310","1.150","1.000","เต็ม 1.275–1.310, หมด ≈ 1.150"],
+["thermo","68 °F is equal to:","20 °C","36 °C","33 °C","(68 − 32) × 5/9 = 20 °C"],
+["thermo","50 °C expressed in kelvin is:","323 K","223 K","50 K","K = °C + 273"],
+["thermo","100 °F expressed in rankine is:","560 °R","373 °R","100 °R","R = °F + 460"],
+["thermo","Heat from the sun reaches the Earth mainly by:","radiation","convection","conduction","รังสีเดินทางผ่านสุญญากาศได้"],
+["thermo","Heat transfer by convection requires:","a moving fluid","direct contact between solids","a vacuum","convection พาความร้อนไปกับของไหลที่เคลื่อนที่"],
+["thermo","During a change of state, the temperature of a substance:","remains constant","increases","decreases","พลังงานถูกใช้เปลี่ยนสถานะ (ความร้อนแฝง) อุณหภูมิจึงคงที่"],
+["thermo","10 ft³ of gas at 100 psia is compressed to 4 ft³ at constant temperature. The new pressure is:","250 psia","40 psia","25 psia","Boyle: P2 = 100 × 10 ÷ 4 = 250"],
+["thermo","A sealed container of gas at 500 °R and 100 psia is heated to 600 °R. The new pressure is:","120 psia","83.3 psia","600 psia","ปริมาตรคงที่: P2 = 100 × 600 ÷ 500 = 120"],
+["thermo","When using the general gas law, pressure and temperature must be:","absolute values","gauge pressure and Celsius","gauge pressure and absolute temperature","ต้องใช้ psia และ K หรือ °R เสมอ"],
+["thermo","The second law of thermodynamics states that heat flows naturally from:","a hot body to a cold body","a cold body to a hot body","a body of high mass to one of low mass","ความร้อนไหลจากร้อนไปเย็นเอง"],
+["thermo","The first law of thermodynamics is a statement of:","conservation of energy","increasing entropy","the gas laws","พลังงานไม่สร้างไม่ทำลาย แค่เปลี่ยนรูป"],
+["thermo","A thermocouple produces a voltage because of:","two dissimilar metals joined at junctions at different temperatures","a change in resistance of a metal wire","expansion of a liquid","เทอร์โมคัปเปิล = โลหะต่างชนิดต่อกัน อุณหภูมิ hot/cold junction ต่างกัน"],
+["thermo","A bimetallic thermometer works on the principle of:","differential expansion of two bonded metals","change of electrical resistance","vapour pressure","โลหะสองชนิดติดกันขยายตัวต่างกัน"],
+["thermo","In an electrical resistance thermometer, as temperature rises the resistance of the metal element:","increases","decreases","stays constant","โลหะส่วนใหญ่ความต้านทานเพิ่มตามอุณหภูมิ"],
+["thermo","The constant-volume cycle describes the combustion process of a:","reciprocating piston engine","gas turbine engine","ramjet","ลูกสูบเผาไหม้ที่ปริมาตรคงที่ ส่วนเจ็ตเผาไหม้ที่ความดันคงที่"],
+["thermo","A vapour-cycle refrigeration system moves heat:","from a cooler space to a warmer space using work input","from a warmer space to a cooler space with no work input","by changing the mass of the refrigerant","ต้องใส่งานจึงย้ายความร้อนจากที่เย็นไปที่ร้อนได้"],
+["thermo","Thermal efficiency of an engine is the ratio of:","useful work output to heat energy input","heat energy input to work output","fuel flow to air flow","ประสิทธิภาพ = ผลที่ได้ ÷ พลังงานที่ใส่"],
+["thermo","Dalton's law states that the total pressure of a gas mixture is:","the sum of the partial pressures","the product of the partial pressures","equal to the highest partial pressure","ความดันรวม = ผลรวมความดันย่อย"],
+["optics","The speed of light in a vacuum is approximately:","3 × 10⁸ m/s","3 × 10⁵ m/s","340 m/s","ประมาณ 299 792 458 m/s"],
+["optics","The refractive index of a material is:","speed of light in vacuum ÷ speed of light in the material","speed of light in the material ÷ speed of light in vacuum","speed of light × wavelength","n = c ÷ v จึงมีค่าไม่ต่ำกว่า 1"],
+["optics","Light entering a slower (denser) medium at an angle is bent:","towards the normal","away from the normal","parallel to the surface","ช้าลง → หักเข้าหาเส้นปกติ"],
+["optics","A convex mirror gives:","a smaller image with a wider field of view","a magnified image","a larger field of view and a magnified image","กระจกนูนกระจายแสง ภาพเล็ก มุมมองกว้าง"],
+["optics","In a fibre optic cable, light is kept within the core by:","the reflective cladding","the outer jacket","the buffer coating","cladding สะท้อนแสงกลับเข้าแกน"],
+["optics","An advantage of fibre optic data transmission is:","immunity to electromagnetic interference","low cost of connectors","high signal attenuation","ไม่ถูกรบกวนด้วยคลื่นแม่เหล็กไฟฟ้า"],
+["optics","Compared with a mechanical splice, a fusion splice has:","lower optical loss and greater strength","higher optical loss and greater strength","lower optical loss and lower strength","fusion สูญเสียน้อยกว่าและแข็งแรงกว่า"],
+["optics","Of the visible colours, the longest wavelength belongs to:","red","green","violet","แดงยาวที่สุด ม่วงสั้นที่สุด"],
+["sound","Sound waves are:","longitudinal","transverse","electromagnetic","เสียงเป็นคลื่นตามยาว"],
+["sound","Sound cannot travel through:","a vacuum","water","steel","เสียงต้องมีตัวกลาง"],
+["sound","The loudness of a sound is related to its:","amplitude","frequency","wavelength","แอมพลิจูด = ความดัง"],
+["sound","The pitch of a sound is determined by its:","frequency","amplitude","speed","ความถี่ = ระดับเสียงสูงต่ำ"],
+["sound","As a sound source approaches a stationary observer, the observed frequency:","increases","decreases","does not change","Doppler: เข้าใกล้ = ความถี่สูงขึ้น"],
+["sound","An aircraft flies at 1 140 mph where the speed of sound is 760 mph. The Mach number is:","1.5","0.67","2.0","1 140 ÷ 760 = 1.5"],
+["sound","Noise-cancelling headphones work mainly by:","destructive interference","resonance","the Doppler effect","คลื่นเฟสตรงข้ามหักล้างกัน"],
+["sound","The speed of sound in a medium depends mainly on its:","density and elasticity","colour and temperature only","pressure only","ขึ้นกับความหนาแน่นและความยืดหยุ่นของตัวกลาง"]
+];
+window.M02BANK = BANK;
+var TOPICS = {matter:"Matter",mech:"Mechanics",thermo:"Thermodynamics",optics:"Optics",sound:"Wave and Sound"};
+var BLUE = {matter:6,mech:22,thermo:11,optics:6,sound:7};
+var LS_H = "m02-mock-history", LS_W = "m02-mock-wrong";
+
+function ld(k,d){ try{ var v = JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } }
+function sv(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function el(tag,cls,html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function idsOf(t){ var r=[]; BANK.forEach(function(b,i){ if(b[0]===t) r.push(i); }); return r; }
+function pad(n){ return (n<10?"0":"")+n; }
+
+/* ================= MOCK TEST ================= */
+function mock(root){
+  root.innerHTML = "";
+  var wrap = el("div","mock"); root.appendChild(wrap);
+  var LETTERS = ["A","B","C"];
+
+  function home(){
+    wrap.innerHTML = "";
+    wrap.appendChild(el("h2",null,"Mock test — Module 2 Physics (B1)"));
+    wrap.appendChild(el("div","note",
+      "<b>รูปแบบข้อสอบจริง (Part-66 Cat B1/B2):</b> 52 ข้อ, 65 นาที, ตัวเลือก 3 ข้อ ถูก 1 ข้อ, เกณฑ์ผ่าน 75% (39/52) และไม่หักคะแนนลบ ตามที่แหล่งข้อมูลสาธารณะระบุ กรุณายืนยันกับศูนย์สอบ Part-147 หรือหน่วยงานของคุณ รวมถึงเรื่องเครื่องคิดเลขและหน่วยที่ใช้<br>" +
+      "<b>คลังข้อสอบนี้</b>เป็นข้อที่เขียนขึ้นใหม่ตามรูปแบบและเนื้อหา Module 2 (" + BANK.length + " ข้อ) ไม่ใช่ข้อสอบจริง ควรทำคู่กับข้อสอบฝึกจากศูนย์ฝึกของคุณ"));
+    var h = el("div","modes");
+    var b1 = el("button","big"," <b>Full mock</b><span>52 ข้อ · 65 นาที · สัดส่วนตามหัวข้อ</span>");
+    b1.addEventListener("click", function(){ begin("full"); });
+    h.appendChild(b1);
+    var wr = ld(LS_W,[]);
+    var b2 = el("button","big"," <b>ทบทวนข้อที่เคยผิด</b><span>" + wr.length + " ข้อในคลัง · สูงสุด 20 ข้อต่อรอบ</span>");
+    b2.addEventListener("click", function(){ begin("wrong"); });
+    if(!wr.length) b2.disabled = true;
+    h.appendChild(b2);
+    wrap.appendChild(h);
+    wrap.appendChild(el("h3",null,"ฝึกแยกหัวข้อ (10 ข้อ เฉลยทันที ไม่จับเวลา)"));
+    var chips = el("div","chips");
+    Object.keys(TOPICS).forEach(function(t){
+      var c = el("button","chip", TOPICS[t] + " (" + idsOf(t).length + ")");
+      c.addEventListener("click", function(){ begin(t); });
+      chips.appendChild(c);
+    });
+    wrap.appendChild(chips);
+    var hist = ld(LS_H,[]);
+    if(hist.length){
+      wrap.appendChild(el("h3",null,"ผลย้อนหลัง"));
+      var rows = hist.slice(-8).reverse().map(function(x){
+        return "<tr><td>"+esc(x.d)+"</td><td>"+esc(x.k)+"</td><td>"+x.s+"/"+x.n+"</td><td>"+x.p+"%</td><td>"+(x.full?(x.p>=75?"ผ่าน":"ไม่ผ่าน"):"-")+"</td></tr>";
+      }).join("");
+      wrap.appendChild(el("div","tablewrap","<table><thead><tr><th>วันที่</th><th>โหมด</th><th>คะแนน</th><th>%</th><th>ผล</th></tr></thead><tbody>"+rows+"</tbody></table>"));
+    }
+  }
+
+  function begin(kind){
+    var ids;
+    if(kind==="full"){
+      ids = [];
+      Object.keys(BLUE).forEach(function(t){ ids = ids.concat(shuffle(idsOf(t)).slice(0,BLUE[t])); });
+      ids = shuffle(ids);
+    } else if(kind==="wrong"){
+      ids = shuffle(ld(LS_W,[])).slice(0,20);
+    } else {
+      ids = shuffle(idsOf(kind)).slice(0,10);
+    }
+    if(!ids.length) return;
+    run(kind, ids);
+  }
+
+  function run(kind, ids){
+    var full = kind==="full";
+    var Qs = ids.map(function(i){
+      var b = BANK[i];
+      return {id:i, topic:b[0], stem:b[1], ex:b[5], pick:-1, flag:false,
+        opts: shuffle([{t:b[2],ok:true},{t:b[3],ok:false},{t:b[4],ok:false}])};
+    });
+    var cur = 0, left = 65*60, timer = null, timeEl = null;
+    if(full){
+      timer = setInterval(function(){
+        if(!document.body.contains(wrap)){ clearInterval(timer); return; }
+        left--;
+        if(timeEl) timeEl.textContent = pad(Math.floor(left/60)) + ":" + pad(left%60);
+        if(timeEl && left<=300) timeEl.className = "timer low";
+        if(left<=0){ clearInterval(timer); finish(true); }
+      }, 1000);
+    }
+
+    function draw(){
+      wrap.innerHTML = "";
+      var q = Qs[cur];
+      var bar = el("div","examBar");
+      bar.appendChild(el("span",null,(full?"Full mock":(kind==="wrong"?"ทบทวนข้อผิด":TOPICS[kind])) + " · ข้อ " + (cur+1) + "/" + Qs.length));
+      if(full){
+        timeEl = el("span","timer" + (left<=300?" low":""), pad(Math.floor(left/60)) + ":" + pad(left%60));
+        bar.appendChild(timeEl);
+      }
+      wrap.appendChild(bar);
+
+      var card = el("div","qcard");
+      card.appendChild(el("p","stem", esc(q.stem)));
+      var locked = !full && q.pick>=0;
+      q.opts.forEach(function(o,idx){
+        var cls = "opt";
+        if(q.pick===idx) cls += " sel";
+        if(locked){ if(o.ok) cls += " right"; else if(q.pick===idx) cls += " wrong"; }
+        var b = el("button",cls,"<span class='ltr'>"+LETTERS[idx]+"</span><span>"+esc(o.t)+"</span>");
+        b.addEventListener("click", function(){
+          if(locked) return;
+          q.pick = idx; draw();
+        });
+        card.appendChild(b);
+      });
+      if(locked){
+        card.appendChild(el("div","expl",(q.opts[q.pick].ok?"✓ ถูกต้อง · ":"✗ ผิด · ") + esc(q.ex)));
+      }
+      wrap.appendChild(card);
+
+      var nav = el("div","qnav");
+      var prev = el("button",null,"← ก่อนหน้า"); prev.disabled = cur===0;
+      prev.addEventListener("click", function(){ cur--; draw(); });
+      var flag = el("button", q.flag?"on":"", q.flag?"⚑ ติดธงแล้ว":"⚐ ติดธง");
+      flag.addEventListener("click", function(){ q.flag = !q.flag; draw(); });
+      var next = el("button",null,"ถัดไป →"); next.disabled = cur===Qs.length-1;
+      next.addEventListener("click", function(){ cur++; draw(); });
+      nav.appendChild(prev); if(full) nav.appendChild(flag); nav.appendChild(next);
+      wrap.appendChild(nav);
+
+      var grid = el("div","qgrid");
+      Qs.forEach(function(x,i){
+        var c = "g" + (x.pick>=0?" ans":"") + (x.flag?" flag":"") + (i===cur?" cur":"");
+        var g = el("button",c,String(i+1));
+        g.addEventListener("click", function(){ cur=i; draw(); });
+        grid.appendChild(g);
+      });
+      wrap.appendChild(grid);
+
+      var fin = el("button","finish","ส่งข้อสอบและดูผล");
+      fin.addEventListener("click", function(){
+        var un = Qs.filter(function(x){ return x.pick<0; }).length;
+        if(un && !confirm("ยังไม่ได้ตอบ " + un + " ข้อ (นับเป็นผิด) ส่งเลยหรือไม่?")) return;
+        finish(false);
+      });
+      wrap.appendChild(fin);
+      var quit = el("button","linkbtn","ออกโดยไม่บันทึก");
+      quit.addEventListener("click", function(){ if(timer) clearInterval(timer); home(); });
+      wrap.appendChild(quit);
+    }
+
+    function finish(timeUp){
+      if(timer) clearInterval(timer);
+      var score = 0, by = {}, wrong = ld(LS_W,[]);
+      Qs.forEach(function(q){
+        var ok = q.pick>=0 && q.opts[q.pick].ok;
+        if(ok) score++;
+        by[q.topic] = by[q.topic] || {n:0,s:0};
+        by[q.topic].n++; if(ok) by[q.topic].s++;
+        var at = wrong.indexOf(q.id);
+        if(ok && at>-1) wrong.splice(at,1);
+        if(!ok && at<0) wrong.push(q.id);
+      });
+      sv(LS_W, wrong);
+      var pct = Math.round(score*100/Qs.length);
+      var hist = ld(LS_H,[]);
+      var dt = new Date();
+      hist.push({d: dt.getDate()+"/"+(dt.getMonth()+1)+"/"+dt.getFullYear(), k: full?"Full mock":(kind==="wrong"?"ทบทวนข้อผิด":TOPICS[kind]), s:score, n:Qs.length, p:pct, full:full});
+      sv(LS_H, hist.slice(-30));
+      result(Qs, score, pct, by, timeUp, full);
+    }
+    draw();
+  }
+
+  function result(Qs, score, pct, by, timeUp, full){
+    wrap.innerHTML = "";
+    wrap.appendChild(el("h2",null,"ผลสอบ"));
+    var need = Math.ceil(Qs.length*0.75);
+    var pass = score>=need;
+    var box = el("div","score " + (pass?"pass":"fail"),
+      "<div class='big-n'>"+score+"/"+Qs.length+" <small>("+pct+"%)</small></div>" +
+      "<div>"+(full ? (pass?"ผ่านเกณฑ์ 75%":"ยังไม่ถึงเกณฑ์ 75% (ต้องได้ "+need+" ข้อ)") : (pass?"สูงกว่าเกณฑ์ 75%":"ต่ำกว่าเกณฑ์ 75% (ต้องได้ "+need+" ข้อจาก "+Qs.length+")")) + (timeUp?" · หมดเวลา":"") + "</div>");
+    wrap.appendChild(box);
+    var rows = Object.keys(by).map(function(t){
+      var p = Math.round(by[t].s*100/by[t].n);
+      return "<tr><td>"+TOPICS[t]+"</td><td>"+by[t].s+"/"+by[t].n+"</td><td>"+p+"%</td><td>"+(p<75?"ควรทบทวน":"ดี")+"</td></tr>";
+    }).join("");
+    wrap.appendChild(el("div","tablewrap","<table><thead><tr><th>หัวข้อ</th><th>คะแนน</th><th>%</th><th></th></tr></thead><tbody>"+rows+"</tbody></table>"));
+    var acts = el("div","qnav");
+    var again = el("button",null,"กลับหน้าหลัก"); again.addEventListener("click", home);
+    acts.appendChild(again); wrap.appendChild(acts);
+    wrap.appendChild(el("h3",null,"เฉลยและคำอธิบาย"));
+    Qs.forEach(function(q,i){
+      var ok = q.pick>=0 && q.opts[q.pick].ok;
+      var right = q.opts.filter(function(o){return o.ok;})[0].t;
+      var d = el("div","rev " + (ok?"ok":"bad"));
+      d.innerHTML = "<p><b>"+(i+1)+".</b> "+esc(q.stem)+"</p>" +
+        "<p>คำตอบของคุณ: "+(q.pick>=0?esc(q.opts[q.pick].t):"ไม่ได้ตอบ")+"</p>" +
+        (ok?"":"<p>คำตอบที่ถูก: <b>"+esc(right)+"</b></p>") +
+        "<p class='why'>"+esc(q.ex)+"</p>";
+      wrap.appendChild(d);
+    });
+  }
+  home();
+}
+
+/* ================= CALCULATION LAB ================= */
+function ri(a,b){ return a + Math.floor(Math.random()*(b-a+1)); }
+function rs(lo,hi,st){ return lo + st*ri(0, Math.round((hi-lo)/st)); }
+function pick(a){ return a[ri(0,a.length-1)]; }
+function nf(n,d){
+  var m = Math.pow(10,d), s = (Math.round(n*m)/m).toString().split(".");
+  s[0] = s[0].replace(/\B(?=(\d{3})+(?!\d))/g," ");
+  return s.join(".");
+}
+var G = [
+{id:"temp", title:"แปลงอุณหภูมิ", tips:[
+ "จำจุดน้ำ: 0/100 °C = 32/212 °F = 273/373 K = 492/672 °R",
+ "C → F: คูณ 1.8 แล้วบวก 32; F → C: ลบ 32 แล้วคูณ 5/9",
+ "เช็กด้วย −40 ซึ่งเท่ากันทั้งสองสเกล"], gen:function(){
+  var v = ri(0,3), k, a;
+  if(v===0){ k=ri(2,14); var F=32+9*k; a=5*k;
+    return {q:"แปลง "+F+" °F เป็น °C", ans:a, unit:"°C", steps:["°C = (°F − 32) × 5/9","= ("+F+" − 32) × 5/9 = "+(9*k)+" × 5/9 = "+a+" °C"]}; }
+  if(v===1){ var C=ri(-30,120); a=C+273;
+    return {q:"แปลง "+C+" °C เป็นเคลวิน (K)", ans:a, unit:"K", steps:["K = °C + 273","= "+C+" + 273 = "+a+" K"]}; }
+  if(v===2){ var F2=ri(-40,200); a=F2+460;
+    return {q:"แปลง "+F2+" °F เป็นแรงคิน (°R)", ans:a, unit:"°R", steps:["°R = °F + 460","= "+F2+" + 460 = "+a+" °R"]}; }
+  var C2=5*ri(-6,30); a=1.8*C2+32;
+  return {q:"แปลง "+C2+" °C เป็น °F", ans:a, unit:"°F", steps:["°F = 1.8 × °C + 32","= 1.8 × "+C2+" + 32 = "+nf(a,1)+" °F"]};
+}},
+{id:"boyle", title:"กฎบอยล์ (P×V)", tips:[
+ "อุณหภูมิคงที่ → P1×V1 = P2×V2",
+ "ปริมาตรลด ความดันต้องเพิ่ม ใช้เช็กทิศทางของคำตอบ",
+ "ถ้าโจทย์ให้ psig ให้บวก 14.7 เป็น psia ก่อน"], gen:function(){
+  var V1=ri(6,30), P1=rs(50,500,10), V2=ri(2,V1-2), a=P1*V1/V2;
+  return {q:"แก๊ส "+V1+" ft³ ที่ "+P1+" psia ถูกอัดเหลือ "+V2+" ft³ ที่อุณหภูมิคงที่ ความดันใหม่เท่าใด?", ans:a, unit:"psia",
+   steps:["P1×V1 = P2×V2","P2 = "+P1+" × "+V1+" ÷ "+V2+" = "+nf(a,1)+" psia","เช็ก: ปริมาตรลด ความดันเพิ่ม ✓"]};
+}},
+{id:"gas", title:"กฎแก๊ส (psig, °F)", tips:[
+ "ขั้นที่ 1: psig + 14.7 = psia และ °F + 460 = °R",
+ "ขั้นที่ 2: ปริมาตรคงที่ → P2 = P1 × T2 ÷ T1",
+ "ขั้นที่ 3: ลบ 14.7 กลับเป็น psig (ลืมขั้นนี้คือข้อผิดที่พบบ่อยที่สุด)"], gen:function(){
+  var P1=rs(100,800,50), T1=ri(40,90), T2=T1+ri(30,90);
+  var pa1=P1+14.7, r1=T1+460, r2=T2+460, pa2=pa1*r2/r1, a=pa2-14.7;
+  return {q:"ถังแก๊สปริมาตรคงที่ อ่านได้ "+P1+" psig ที่ "+T1+" °F เมื่อร้อนขึ้นเป็น "+T2+" °F จะอ่านได้กี่ psig?", ans:a, unit:"psig", tol:0.005,
+   steps:["เป็นค่าสัมบูรณ์: P1 = "+P1+" + 14.7 = "+nf(pa1,1)+" psia","T1 = "+T1+" + 460 = "+r1+" °R, T2 = "+T2+" + 460 = "+r2+" °R","P2 = P1 × T2 ÷ T1 = "+nf(pa1,1)+" × "+r2+" ÷ "+r1+" = "+nf(pa2,1)+" psia","กลับเป็น gauge: "+nf(pa2,1)+" − 14.7 = "+nf(a,1)+" psig"]};
+}},
+{id:"lever", title:"คาน (E×L = R×l)", tips:[
+ "เขียนสมการแรงบิดสมดุลก่อน: E × แขนแรง = R × แขนต้านทาน",
+ "แขนฝั่งไหนยาวกว่า ฝั่งนั้นใช้แรงน้อยกว่า ใช้เช็กคำตอบ",
+ "แขน = ระยะจากจุดหมุน ไม่ใช่ความยาวคานทั้งอัน"], gen:function(){
+  var R=rs(100,600,50), l=ri(6,18), L=rs(36,72,6), a=R*l/L;
+  return {q:"คานมีแขนแรง "+L+" in ความต้านทาน "+R+" lb อยู่ห่างจุดหมุน "+l+" in ต้องออกแรงกี่ lb?", ans:a, unit:"lb",
+   steps:["E × L = R × l","E = R × l ÷ L = "+R+" × "+l+" ÷ "+L+" = "+nf(a,1)+" lb","เช็ก: แขนแรงยาวกว่า แรงที่ใช้ต้องน้อยกว่า "+R+" lb ✓"]};
+}},
+{id:"pulley", title:"ชุดรอก", tips:[
+ "นับเฉพาะเส้นเชือกที่รับน้ำหนักจริง (ไม่นับเส้นที่เรามือดึง ถ้าดึงลงจากรอกตายตัว)",
+ "MA = จำนวนเส้น แรง = น้ำหนัก ÷ MA",
+ "ได้แรง = เสียระยะ ดึงเชือกยาว n เท่า"], gen:function(){
+  var n=ri(2,8), W=n*ri(20,100);
+  return {q:"ชุดรอกมีเชือกรับน้ำหนัก "+n+" เส้น ยกของ "+W+" lb ใช้แรงกี่ lb? (ไม่คิดแรงเสียดทาน)", ans:W/n, unit:"lb",
+   steps:["MA = จำนวนเส้นที่รับน้ำหนัก = "+n,"แรง = "+W+" ÷ "+n+" = "+W/n+" lb"]};
+}},
+{id:"gear", title:"เฟืองและรอบ", tips:[
+ "ฟันมาก = หมุนช้า, ฟันน้อย = หมุนเร็ว (ผกผันกัน)",
+ "ฟัน1 × รอบ1 = ฟัน2 × รอบ2",
+ "เช็ก: เฟืองเล็กต้องหมุนเร็วกว่าเฟืองใหญ่"], gen:function(){
+  var t1=pick([8,10,12,15,20]), t2=t1*pick([2,3,4]), rpm=rs(50,200,10), a=rpm*t2/t1;
+  return {q:"Pinion "+t1+" ฟัน ขับ spur "+t2+" ฟัน spur หมุน "+rpm+" rpm pinion หมุนกี่ rpm?", ans:a, unit:"rpm",
+   steps:["ฟัน × รอบ เท่ากัน: "+t1+" × N = "+t2+" × "+rpm,"N = "+t2+" × "+rpm+" ÷ "+t1+" = "+nf(a,1)+" rpm","เช็ก: pinion เล็กกว่า จึงเร็วกว่า ✓"]};
+}},
+{id:"hyd", title:"ไฮดรอลิก (Pascal)", tips:[
+ "หาความดันก่อน P = F ÷ A จากลูกสูบเข้า",
+ "ความดันเท่ากันทั้งระบบ แล้ว F2 = P × A2",
+ "ใช้สามเหลี่ยม F-P-A: ปิดตัวที่ต้องการ"], gen:function(){
+  var F1=rs(10,100,5), A1=pick([0.25,0.5,1,2]), A2=pick([5,10,15,20]), P=F1/A1, a=P*A2;
+  return {q:"ลูกสูบเข้าพื้นที่ "+A1+" in² รับแรง "+F1+" lb ลูกสูบออกพื้นที่ "+A2+" in² แรงออกกี่ lb?", ans:a, unit:"lb",
+   steps:["P = F ÷ A = "+F1+" ÷ "+A1+" = "+nf(P,1)+" psi","F2 = P × A2 = "+nf(P,1)+" × "+A2+" = "+nf(a,1)+" lb","MA = "+nf(a/F1,2)]};
+}},
+{id:"ramp", title:"ทางเอียง", tips:[
+ "แรง = น้ำหนัก × สูง ÷ ยาว (ใช้แนวคิดเดียวกับคาน)",
+ "ทางเอียงยาวกว่าเดิม = ออกแรงน้อยลง"], gen:function(){
+  var h=pick([3,4,6,8]), L=h*pick([3,4,5,6]), W=rs(800,3000,100), a=W*h/L;
+  return {q:"ลากเครื่องบิน "+W+" lb ขึ้นทางเอียงสูง "+h+" in ยาว "+L+" in ต้องใช้แรงกี่ lb?", ans:a, unit:"lb",
+   steps:["E × L = W × h","E = "+W+" × "+h+" ÷ "+L+" = "+nf(a,1)+" lb","MA = "+L+" ÷ "+h+" = "+nf(L/h,2)]};
+}},
+{id:"ke", title:"พลังงานจลน์", tips:[
+ "KE = ½ × (W ÷ g) × v² โดย g = 32.2 และ v หน่วย ft/s",
+ "ยกกำลังสองที่ความเร็วเท่านั้น (ไม่ใช่ทั้งก้อน)",
+ "ความเร็ว 2 เท่า → KE 4 เท่า ใช้เช็กได้"], gen:function(){
+  var W=rs(5000,60000,5000), v=rs(50,250,10), a=0.5*W/32.2*v*v;
+  return {q:"เครื่องบินหนัก "+W+" lb วิ่งด้วย "+v+" ft/s พลังงานจลน์กี่ ft-lb?", ans:a, unit:"ft-lb", tol:0.01,
+   steps:["มวล = "+W+" ÷ 32.2 = "+nf(W/32.2,2)+" slugs","v² = "+v+"² = "+(v*v),"KE = ½ × "+nf(W/32.2,2)+" × "+(v*v)+" = "+nf(a,0)+" ft-lb"]};
+}},
+{id:"hp", title:"งาน กำลัง แรงม้า", tips:[
+ "งาน = แรง × ระยะ แล้วหารเวลา (นาที) → ft-lb/min",
+ "1 hp = 33 000 ft-lb/min = 550 ft-lb/s",
+ "ดูหน่วยเวลาให้ตรงกับตัวหาร"], gen:function(){
+  var W=rs(1000,20000,1000), h=ri(2,12), t=ri(1,5), a=W*h/t/33000;
+  return {q:"ยกน้ำหนัก "+W+" lb สูง "+h+" ft ใน "+t+" นาที ต้องใช้กี่ hp?", ans:a, unit:"hp", tol:0.015,
+   steps:["งาน = "+W+" × "+h+" = "+nf(W*h,0)+" ft-lb","กำลัง = "+nf(W*h,0)+" ÷ "+t+" = "+nf(W*h/t,1)+" ft-lb/min","hp = "+nf(W*h/t,1)+" ÷ 33 000 = "+nf(a,3)]};
+}},
+{id:"torque", title:"แรงบิดจากแรงม้า", tips:[
+ "Torque (lb-ft) = hp × 5 252 ÷ rpm",
+ "รอบสูงขึ้น แรงบิดต่อแรงม้าลดลง",
+ "ที่ 5 252 rpm แรงบิดเท่ากับแรงม้าพอดี ใช้ประมาณคำตอบ"], gen:function(){
+  var hp=rs(100,400,20), rpm=rs(1800,2800,100), a=hp*5252/rpm;
+  return {q:"เครื่องยนต์ "+hp+" hp ที่ "+rpm+" rpm ให้แรงบิดกี่ lb-ft?", ans:a, unit:"lb-ft",
+   steps:["T = hp × 5 252 ÷ rpm","= "+hp+" × 5 252 ÷ "+rpm+" = "+nf(a,1)+" lb-ft"]};
+}},
+{id:"buoy", title:"แรงลอยตัว", tips:[
+ "Fb = ปริมาตร × ความหนาแน่นของของไหล (น้ำจืด 62.4 lb/ft³)",
+ "เทียบ Fb กับน้ำหนัก: Fb มากกว่า = ลอย น้อยกว่า = จม",
+ "น้ำหนักที่ชั่งใต้น้ำ = น้ำหนักจริง − Fb"], gen:function(){
+  var V=ri(5,40), W=rs(100,2500,50), fb=V*62.4, a=fb-W;
+  return {q:"วัตถุ "+V+" ft³ หนัก "+W+" lb จมในน้ำจืด (62.4 lb/ft³) ค่า Fb − W เป็นเท่าใด? (ติดลบ = จม)", ans:a, unit:"lb", tol:0.01, abs:0.5,
+   steps:["Fb = V × 62.4 = "+V+" × 62.4 = "+nf(fb,1)+" lb","Fb − W = "+nf(fb,1)+" − "+W+" = "+nf(a,1)+" lb",(a>=0?"บวก → ลอย":"ลบ → จม")]};
+}},
+{id:"sg", title:"Density และ SG", tips:[
+ "density = น้ำหนัก ÷ ปริมาตร",
+ "SG = density ÷ 62.4 (ไม่มีหน่วย)",
+ "SG < 1 ลอยน้ำ"], gen:function(){
+  var V=ri(4,30), Wt=rs(100,1200,10), d=Wt/V, a=d/62.4;
+  return {q:"ของเหลว "+V+" ft³ หนัก "+Wt+" lb มี specific gravity เท่าใด? (น้ำ = 62.4 lb/ft³)", ans:a, unit:"", tol:0.015, abs:0.01,
+   steps:["density = "+Wt+" ÷ "+V+" = "+nf(d,2)+" lb/ft³","SG = "+nf(d,2)+" ÷ 62.4 = "+nf(a,3)]};
+}},
+{id:"accel", title:"ความเร่งและ G", tips:[
+ "a = (Vf − Vi) ÷ t ก่อน แล้วค่อยเปลี่ยนหน่วย",
+ "mph → ft/s คูณ 1.467 และ 1 G = 32.2 ft/s²",
+ "เช็กเลขกลม: 60 mph = 88 ft/s"], gen:function(){
+  var v1=rs(0,300,50), v2=v1+rs(100,600,50), t=rs(10,60,5), am=(v2-v1)/t, af=am*1.467, a=af/32.2;
+  return {q:"เครื่องบินเร่งจาก "+v1+" เป็น "+v2+" mph ใน "+t+" วินาที ความเร่งกี่ G?", ans:a, unit:"G", tol:0.015, abs:0.01,
+   steps:["a = ("+v2+" − "+v1+") ÷ "+t+" = "+nf(am,2)+" mph/s","เป็น ft/s²: "+nf(am,2)+" × 1.467 = "+nf(af,2),"G = "+nf(af,2)+" ÷ 32.2 = "+nf(a,3)]};
+}},
+{id:"thrust", title:"แรงขับเครื่องยนต์", tips:[
+ "F = W × (Vf − Vi) ÷ (g × t) โดย W คืออัตราไหลเป็น lb/s ใช้ t = 1",
+ "ลบความเร็วก่อนค่อยคูณ",
+ "g = 32.2 ft/s²"], gen:function(){
+  var w=rs(80,300,10), vi=rs(0,300,50), vf=vi+rs(500,1500,100), a=w*(vf-vi)/32.2;
+  return {q:"เครื่องยนต์ดันอากาศ "+w+" lb/s จาก "+vi+" เป็น "+vf+" ft/s แรงขับกี่ lb?", ans:a, unit:"lb", tol:0.01,
+   steps:["F = W (Vf − Vi) ÷ (g × t)","= "+w+" × ("+vf+" − "+vi+") ÷ 32.2 = "+w+" × "+(vf-vi)+" ÷ 32.2","= "+nf(a,0)+" lb"]};
+}},
+{id:"mach", title:"Mach number", tips:["Mach = ความเร็วของเครื่อง ÷ ความเร็วเสียง (หน่วยเดียวกัน)","Mach < 1 ต่ำกว่าเสียง, > 1 เหนือเสียง"], gen:function(){
+  var s=pick([660,700,740,760]), M=pick([0.5,0.75,1.2,1.5,2]), V=Math.round(M*s), a=V/s;
+  return {q:"เครื่องบินบิน "+V+" mph ในอากาศที่ความเร็วเสียง "+s+" mph คือ Mach เท่าใด?", ans:a, unit:"Mach", tol:0.01, abs:0.01,
+   steps:["Mach = "+V+" ÷ "+s+" = "+nf(a,3)]};
+}},
+{id:"ref", title:"ดัชนีหักเหของแสง", tips:["n = c ÷ v ดังนั้น v = c ÷ n","n มีค่าไม่ต่ำกว่า 1 ความเร็วในตัวกลางต้องช้ากว่า c"], gen:function(){
+  var n=pick([1.33,1.5,1.6,1.9,2.4]), a=2.998/n;
+  return {q:"ความเร็วแสงในวัสดุที่มี n = "+n+" เป็นกี่ ×10⁸ m/s? (ใช้ c = 2.998 ×10⁸ m/s)", ans:a, unit:"×10⁸ m/s", tol:0.01, abs:0.005,
+   steps:["v = c ÷ n = 2.998 ÷ "+n+" = "+nf(a,3)+" ×10⁸ m/s"]};
+}}
+];
+
+function calc(root){
+  root.innerHTML = "";
+  var box = el("div","calc"); root.appendChild(box);
+  var cur = "mix", prob = null, tot = 0, okc = 0, shown = false;
+
+  function newP(){
+    var g = cur==="mix" ? G[ri(0,G.length-1)] : G.filter(function(x){return x.id===cur;})[0];
+    prob = g.gen(); prob.g = g; shown = false; draw();
+  }
+  function draw(){
+    box.innerHTML = "";
+    box.appendChild(el("h2",null,"ห้องฝึกคำนวณ — Calculation Lab"));
+    var rules = el("ul","tricks");
+    ["ตรวจหน่วยก่อนเสมอ ถ้าโจทย์ผสม mph กับ ft/s ให้แปลงก่อน",
+     "กฎแก๊สใช้ค่าสัมบูรณ์เท่านั้น: psia (psig + 14.7) และ K หรือ °R",
+     "เทียบทิศทางคำตอบ: ปริมาตรลด → ความดันเพิ่ม, ฟันน้อย → หมุนเร็ว, แขนยาว → ใช้แรงน้อย",
+     "ข้อสอบมี 3 ตัวเลือก ประมาณค่าคร่าว ๆ แล้วตัดตัวเลือกที่ผิดทิศหรือผิดขนาดเลข 10 เท่าได้ทันที",
+     "เวลาเฉลี่ย 75 วินาทีต่อข้อ ข้อคำนวณยากให้ติดธงไว้ทำท้ายสุด"].forEach(function(t){ rules.appendChild(el("li",null,t)); });
+    box.appendChild(rules);
+    var chips = el("div","chips");
+    var mixc = el("button","chip" + (cur==="mix"?" on":""),"สุ่มทุกหัวข้อ");
+    mixc.addEventListener("click", function(){ cur="mix"; newP(); });
+    chips.appendChild(mixc);
+    G.forEach(function(g){
+      var c = el("button","chip" + (cur===g.id?" on":""), g.title);
+      c.addEventListener("click", function(){ cur=g.id; newP(); });
+      chips.appendChild(c);
+    });
+    box.appendChild(chips);
+    if(!prob){ newP(); return; }
+
+    var tip = el("div","tipcard");
+    tip.appendChild(el("h3",null,"เทคนิค: " + prob.g.title));
+    var ul = el("ul"); prob.g.tips.forEach(function(t){ ul.appendChild(el("li",null,esc(t))); });
+    tip.appendChild(ul); box.appendChild(tip);
+
+    var card = el("div","qcard");
+    card.appendChild(el("p","stem",esc(prob.q)));
+    var row = el("div","ansrow");
+    var inp = el("input"); inp.type="text"; inp.setAttribute("inputmode","decimal"); inp.placeholder="คำตอบ" + (prob.unit?" ("+prob.unit+")":"");
+    inp.setAttribute("aria-label","Answer");
+    var chk = el("button",null,"ตรวจคำตอบ");
+    var sol = el("button",null,"ดูวิธีทำ");
+    var nxt = el("button",null,"โจทย์ใหม่");
+    row.appendChild(inp); row.appendChild(chk); row.appendChild(sol); row.appendChild(nxt);
+    card.appendChild(row);
+    var fb = el("div","fb"); card.appendChild(fb);
+    function showSteps(){
+      var s = el("ol","steps"); prob.steps.forEach(function(t){ s.appendChild(el("li",null,esc(t))); });
+      fb.appendChild(s); shown = true;
+    }
+    function check(){
+      var u = parseFloat(inp.value.replace(/[\s,]/g,"").replace("−","-"));
+      if(isNaN(u)){ fb.innerHTML = "<p class='bad'>กรอกตัวเลขก่อน</p>"; return; }
+      var tol = prob.tol || 0.01, ab = prob.abs || 0.05;
+      var good = Math.abs(u-prob.ans) <= Math.max(tol*Math.abs(prob.ans), ab);
+      tot++; if(good) okc++;
+      fb.innerHTML = good ? "<p class='ok'>✓ ถูกต้อง: " + nf(prob.ans,3) + " " + esc(prob.unit) + "</p>" : "<p class='bad'>✗ ยังไม่ตรง (คำตอบ " + nf(prob.ans,3) + " " + esc(prob.unit) + ")</p>";
+      showSteps(); score.textContent = "ถูก " + okc + " จาก " + tot + " ข้อ (รอบนี้)";
+    }
+    chk.addEventListener("click", check);
+    inp.addEventListener("keydown", function(e){ if(e.key==="Enter") check(); });
+    sol.addEventListener("click", function(){ if(!shown){ fb.innerHTML=""; showSteps(); } });
+    nxt.addEventListener("click", newP);
+    box.appendChild(card);
+    var score = el("p","scoreline","ถูก " + okc + " จาก " + tot + " ข้อ (รอบนี้)");
+    box.appendChild(score);
+    inp.focus();
+  }
+  draw();
+}
+
+window.M02R = {mock: mock, calc: calc};
+})();
+</script>
+
+<script>
+(function(){
+"use strict";
+var B = window.M02BANK;
+if(!B) return;
+
+/* ===== 76 additional questions: [topic, stem, correct, wrong1, wrong2, explanation, steps|null, key|null] ===== */
+var NEW = [
+/* matter 80-90 */
+["matter","The three basic particles of an atom are:","protons, neutrons and electrons","protons, neutrons and photons","electrons, ions and neutrons","อะตอมประกอบด้วยโปรตอน (+) นิวตรอน (0) และอิเล็กตรอน (−)",null,"P = Positive, N = Neutral, E = Electron ประจุลบ"],
+["matter","The electrical charge on a neutron is:","zero","positive","negative","นิวตรอนไม่มีประจุไฟฟ้า",null,"Neutron = Neutral"],
+["matter","The valence shell of an atom is the:","outermost electron shell","shell closest to the nucleus","shell that contains the neutrons","valence shell คือชั้นนอกสุด กำหนดการสร้างพันธะและการนำไฟฟ้า",null,"Valence = ด่านหน้า ชั้นนอกสุดที่ติดต่อกับอะตอมอื่น"],
+["matter","A covalent bond is formed when atoms:","share valence electrons","exchange protons","lose neutrons","พันธะโควาเลนต์เกิดจากการใช้อิเล็กตรอนวงนอกร่วมกัน",null,"Co = ร่วม, valent = เวเลนซ์ → แบ่งกันใช้"],
+["matter","Which of the following is a mixture?","Air","Water","Carbon dioxide","อากาศคือแก๊สหลายชนิดผสมกันโดยไม่มีพันธะเคมี ส่วนน้ำและ CO₂ เป็นสารประกอบ",null,"สารประกอบมีสูตรเคมีตายตัว สารผสมไม่มี"],
+["matter","In the periodic table, the elements are arranged in order of their:","atomic number","number of neutrons only","density","ตารางธาตุเรียงตามเลขอะตอม (จำนวนโปรตอน)",null,"เลขอะตอม = จำนวนโปรตอน = ตัวตนของธาตุ"],
+["matter","A material whose atoms have only one electron in the valence shell is generally a:","conductor","insulator","radioactive material","อิเล็กตรอนวงนอก 1 ตัวหลุดง่าย กลายเป็นอิเล็กตรอนอิสระ จึงนำไฟฟ้าดี",null,"วงนอกน้อย (1 หรือ 3) = ตัวนำ, วงนอกเต็ม = ฉนวน"],
+["matter","The state of matter that consists of ionised gas is:","plasma","liquid","solid","พลาสมาคือแก๊สที่แตกตัวเป็นไอออนกับอิเล็กตรอนอิสระ พบในดวงดาว",null,"ของแข็ง ของเหลว แก๊ส พลาสมา เรียงตามพลังงานที่เพิ่มขึ้น"],
+["matter","A water molecule (H₂O) contains:","two hydrogen atoms and one oxygen atom","one hydrogen atom and two oxygen atoms","two hydrogen atoms and two oxygen atoms","H₂O = ไฮโดรเจน 2 ออกซิเจน 1",null,"ตัวห้อย 2 ติดอยู่กับ H"],
+["matter","Surface tension in a liquid is caused by:","attraction between the molecules","the weight of the liquid","atmospheric pressure","โมเลกุลของเหลวดึงดูดกัน จึงเห็นน้ำล้นขอบแก้วแต่ไม่หก",null,"ของเหลวชิดพอจะดึงกัน แก๊สห่างเกินจึงไม่มี"],
+["matter","The law of conservation of matter states that matter:","cannot be created or destroyed","can be created by heat","is destroyed when it burns","สสารไม่หายไป เช่นน้ำมันเผาไหม้กลายเป็นแก๊สไอเสียแต่ยังอยู่",null,"เปลี่ยนสถานะได้ แต่ไม่หาย"],
+/* mech 91-117 */
+["mech","Which of the following is a unit of torque?","lb-ft","lb-ft per second","psi","แรงบิด = แรง × ระยะ หน่วย lb-ft หรือ lb-in",null,"ft-lb ต่อวินาทีคือกำลัง ไม่ใช่แรงบิด"],
+["mech","A force of 40 lb acts at the end of a 2.5 ft wrench. The torque is:","100 lb-ft","16 lb-ft","42.5 lb-ft","แรงบิดคือแรงคูณระยะตั้งฉากจากจุดหมุน",["T = F × d","= 40 × 2.5 = 100 lb-ft"],"คูณ ไม่ใช่บวก และหน่วยต้องเป็น lb-ft"],
+["mech","Two equal, opposite and parallel forces that do not act through the same point form:","a couple","a resultant force","an equilibrant","แรงคู่ขนานเท่ากันทิศตรงข้ามคนละจุดเรียก couple ทำให้เกิดการหมุน",null,"Couple = คู่ → หมุน (torque) ไม่ใช่การเคลื่อนที่ตรง"],
+["mech","The centre of gravity of an aircraft is its:","balance point","point where lift acts","point where thrust acts","CG คือจุดสมดุลของเครื่อง ถ้าแขวนที่จุดนี้จะไม่เอียงหัวขึ้นหรือลง",null,"CG = Center of Gravity = จุดสมดุลน้ำหนัก"],
+["mech","With an aircraft on the ground supported by its landing gear, the top of the wing is under:","tension","compression","shear","น้ำหนักทำให้ปีกหย่อน ผิวบนถูกดึง (tension) ผิวล่างถูกอัด",null,"บนพื้น: บนดึง ล่างอัด / ในอากาศ: บนอัด ล่างดึง"],
+["mech","Strain is the:","deformation produced in a material by stress","internal force per unit area","load required to break a material","stress คือแรงภายใน strain คือการเปลี่ยนรูปที่เกิดจากแรงนั้น",null,"Stress = แรง, Strain = ผลที่เห็น (ยืด หด บิด)"],
+["mech","In flight, lift bends the wing upward so the upper skin is under:","compression","tension","torsion","ในอากาศแรงยกดันปีกขึ้น ผิวบนถูกอัด ผิวล่างถูกดึง",null,"กลับด้านกับตอนจอดบนพื้น"],
+["mech","The pressure at the bottom of a 462 in column of water (8.34 psi per 231 in) is:","16.68 psi","8.34 psi","33.36 psi","ความดันเป็นสัดส่วนกับความสูง",["462 ÷ 231 = 2","2 × 8.34 = 16.68 psi"],"นับจำนวน 231 นิ้วกี่ชุด แล้วคูณ 8.34"],
+["mech","A mercury barometer reading of 29.92 inHg is equal to approximately:","14.7 psi","29.92 psi","760 psi","14.7 psi = 29.92 inHg = 760 mmHg",null,"ท่อง 14.7 → 29.92 → 760"],
+["mech","An aneroid barometer is used in an aircraft as the:","altimeter","airspeed indicator","turn indicator","altimeter คือ aneroid barometer ที่ปรับสเกลเป็นความสูง",null,"ความดันลด = ความสูงเพิ่ม"],
+["mech","An aircraft travels 150 miles in 2.5 hours at constant speed. The speed is:","60 mph","375 mph","6 mph","ความเร็ว = ระยะทาง ÷ เวลา",["v = d ÷ t","= 150 ÷ 2.5 = 60 mph"],"เช็ก: 60 × 2.5 = 150"],
+["mech","An engine accelerates 100 lb of air per second from 200 ft/s to 700 ft/s. The thrust (g = 32.2 ft/s²) is approximately:","1 553 lb","15 528 lb","155 lb","แรงขับ = อัตราไหลของน้ำหนัก × การเปลี่ยนความเร็ว ÷ g",["F = W (Vf − Vi) ÷ g","= 100 × (700 − 200) ÷ 32.2","= 50 000 ÷ 32.2 = 1 553 lb"],"ลบความเร็วก่อน แล้วค่อยหาร 32.2"],
+["mech","A 10 lb weight moves in a circle of 5 ft radius at 100 ft/s. The centripetal force is approximately:","621 lb","6 211 lb","62 lb","Fc = W·v² ÷ (g·r)",["Fc = W v² ÷ (g r)","= 10 × 100² ÷ (32.2 × 5)","= 100 000 ÷ 161 = 621 lb"],"ยกกำลังสองเฉพาะ v และอย่าลืมหาร g ด้วย"],
+["mech","The length of a pendulum is increased from 1 ft to 4 ft. Its period becomes:","twice as long","four times as long","half as long","T = 2π√(L/g) คาบแปรตามรากที่สองของความยาว",["T ∝ √L","√4 = 2 → คาบเพิ่ม 2 เท่า"],"ความยาว ×4 → คาบ ×2 (รากที่สอง)"],
+["mech","The unit of frequency is the:","hertz","watt","pascal","1 Hz = 1 รอบต่อวินาที",null,"Hz = รอบ/วินาที"],
+["mech","A single fixed pulley:","changes the direction of the force only","halves the effort required","doubles the distance moved","รอกตายตัว MA = 1 แค่เปลี่ยนทิศ",null,"ตายตัว = เปลี่ยนทิศ, เคลื่อนที่ = ทดแรง"],
+["mech","A single movable pulley is used to lift 80 lb. The effort required (ignoring friction) is:","40 lb","80 lb","160 lb","รอกเคลื่อนที่มี 2 เส้นรับน้ำหนัก",["MA = 2","E = 80 ÷ 2 = 40 lb"],"ดึงเชือก 2 ฟุต ของขึ้น 1 ฟุต"],
+["mech","A lever has a mechanical advantage of 3. If the effort moves 12 in, the resistance moves:","4 in","36 in","12 in","ได้แรง 3 เท่า ต้องเสียระยะ 3 เท่า",["ระยะ ∝ 1 ÷ MA","12 ÷ 3 = 4 in"],"ได้แรง เสียระยะ"],
+["mech","A worm gear drives a spur gear of 25 teeth. The mechanical advantage is:","25","1","0.04","หมุนเวิร์ม 1 รอบ สเปอร์ขยับ 1 ฟัน MA = จำนวนฟันของสเปอร์",["1 รอบ worm = 1 ฟัน spur","MA = 25"],"MA = จำนวนฟันของ spur"],
+["mech","A 10-tooth pinion drives a 40-tooth spur gear. The pinion turns at 800 rpm. The spur gear turns at:","200 rpm","3 200 rpm","800 rpm","ฟัน × รอบ ของทั้งสองเฟืองเท่ากัน",["10 × 800 = 40 × N","N = 8 000 ÷ 40 = 200 rpm"],"เฟืองใหญ่กว่า 4 เท่า หมุนช้าลง 4 เท่า"],
+["mech","An aircraft of 1 600 lb is pushed up a ramp 6 in high and 24 in long. The force required is:","400 lb","6 400 lb","100 lb","ทางเอียงใช้หลักเดียวกับคาน",["E × L = W × h","E = 1 600 × 6 ÷ 24 = 400 lb"],"MA = ยาว ÷ สูง = 4 → แรง = 1 600 ÷ 4"],
+["mech","One horsepower is equal to:","550 ft-lb per second","33 000 ft-lb per second","746 ft-lb per second","1 hp = 550 ft-lb/s = 33 000 ft-lb/min = 746 W",null,"550 ต่อวินาที, 33 000 ต่อนาที (ต่างกัน 60 เท่า)"],
+["mech","How much work is done in jacking a 30 000 lb aircraft up 3 ft?","90 000 ft-lb","10 000 ft-lb","30 003 ft-lb","งาน = แรง × ระยะที่ยกจริง",["W = F × d","= 30 000 × 3 = 90 000 ft-lb"],"คูณ ไม่ใช่บวก"],
+["mech","A 644 lb object moves at 10 ft/s. Its kinetic energy is:","1 000 ft-lb","3 220 ft-lb","6 440 ft-lb","KE = ½ × มวล × v² โดยมวล = W ÷ g",["มวล = 644 ÷ 32.2 = 20 slugs","KE = ½ × 20 × 10²","= 1 000 ft-lb"],"อย่าลืมแปลงน้ำหนักเป็นมวลก่อน"],
+["mech","A cart is pulled 200 ft against a rolling friction of 10 lb. The cart and load weigh 100 lb. The work done is:","2 000 ft-lb","20 000 ft-lb","210 ft-lb","งานคิดจากแรงต้านจริง ไม่ใช่น้ำหนักทั้งหมด",["W = F × d","= 10 × 200 = 2 000 ft-lb"],"ใช้แรงต้านจริง (friction) ไม่ใช่น้ำหนัก"],
+["mech","Momentum is the product of:","mass and velocity","force and distance","mass and acceleration","โมเมนตัม = m × v",null,"Momentum = Mass × Velocity"],
+["mech","The viscosity of a fluid is a measure of its:","resistance to flow","density","compressibility","viscosity คือความต้านทานการไหล เช่นน้ำมันเครื่องข้นกว่าน้ำ",null,"ข้น = viscosity สูง"],
+/* thermo 118-132 */
+["thermo","Heat is a form of:","energy","force","temperature","ความร้อนคือพลังงานรูปหนึ่ง ส่วน temperature เป็นเพียงระดับความร้อน",null,"Heat = พลังงาน (BTU, J), Temperature = ระดับ (°C)"],
+["thermo","The freezing point of water on the Fahrenheit scale is:","32 °F","0 °F","212 °F","น้ำแข็งละลาย 32 °F เดือด 212 °F",null,"32 / 212 และต่างกัน 180 ขีด"],
+["thermo","−40 °C is equal to:","−40 °F","−72 °F","0 °F","−40 คือจุดเดียวที่ °C = °F",["°F = 1.8 × (−40) + 32","= −72 + 32 = −40 °F"],"−40 เท่ากันทั้งสองสเกล"],
+["thermo","A temperature of 273 K is equal to:","0 °C","273 °C","−273 °C","K = °C + 273",["°C = K − 273","= 273 − 273 = 0 °C"],"273 K = จุดเยือกแข็งของน้ำ"],
+["thermo","212 °F expressed in rankine is:","672 °R","373 °R","212 °R","°R = °F + 460",["°R = °F + 460","= 212 + 460 = 672 °R"],"°F + 460 สำหรับ R, °C + 273 สำหรับ K"],
+["thermo","The temperature in degrees Celsius equal to 140 °F is:","60 °C","108 °C","77 °C","°C = (°F − 32) × 5/9",["°C = (°F − 32) × 5/9","= (140 − 32) × 5/9 = 108 × 5/9 = 60 °C"],"ลบ 32 ก่อนเสมอ แล้วค่อยคูณ 5/9"],
+["thermo","Heat transfer that requires physical contact between two bodies is:","conduction","convection","radiation","conduction ส่งผ่านการสัมผัสโดยตรง",null,"สัมผัส – พา – ส่อง"],
+["thermo","Which of the following is the best conductor of heat?","Silver","Lead","Wood","โลหะนำความร้อนดี เงินดีที่สุดในกลุ่มนี้ ไม้เป็นฉนวน",null,"ตัวนำไฟฟ้าดี มักนำความร้อนดีด้วย"],
+["thermo","A cylinder gauge reads 100 psig. The absolute pressure is:","114.7 psia","85.3 psia","100 psia","psia = psig + 14.7",["psia = psig + 14.7","= 100 + 14.7 = 114.7 psia"],"gauge → absolute ให้บวก 14.7"],
+["thermo","15 ft³ of gas at 200 psia expands to 30 ft³ at constant temperature. The new pressure is:","100 psia","400 psia","50 psia","กฎบอยล์: P × V คงที่",["P1V1 = P2V2","200 × 15 = P2 × 30","P2 = 3 000 ÷ 30 = 100 psia"],"ปริมาตร 2 เท่า ความดันเหลือครึ่งหนึ่ง"],
+["thermo","A gas at 530 °R and 100 psia is heated at constant volume to 636 °R. The new pressure is:","120 psia","83.3 psia","636 psia","ปริมาตรคงที่: ความดันแปรตามอุณหภูมิสัมบูรณ์",["P1/T1 = P2/T2","P2 = 100 × 636 ÷ 530 = 120 psia"],"T เพิ่ม 1.2 เท่า P เพิ่ม 1.2 เท่า"],
+["thermo","The heat of combustion of a fuel is normally expressed in:","BTU per pound or MJ per kg","psi per degree","horsepower per pound","heat of combustion = พลังงานความร้อนต่อมวลเชื้อเพลิง",null,"อยู่ในหน่วยพลังงานต่อมวล"],
+["thermo","In the constant-pressure cycle used in a gas turbine engine, during combustion:","pressure stays almost constant while volume increases","volume stays constant while pressure rises","temperature stays constant","เจ็ตเผาไหม้ที่ความดันเกือบคงที่ ก๊าซขยายตัวไหลผ่านเทอร์ไบน์",null,"ลูกสูบ V คงที่ เจ็ต P คงที่"],
+["thermo","A heat pump differs from a simple air-conditioning unit in that it:","can usually reverse the direction of heat movement","creates heat without any energy input","does not use a refrigerant","ฮีตปั๊มย้ายความร้อนและมักสลับทิศได้ เพื่อทั้งทำความเย็นและความร้อน",null,"Heat pump = ย้ายความร้อน ไม่ได้สร้าง"],
+["thermo","Latent heat is the heat absorbed or released:","during a change of state with no change in temperature","when a substance is heated in a vacuum","only when pressure is constant","ความร้อนแฝงใช้เปลี่ยนสถานะ อุณหภูมิจึงคงที่ระหว่างเปลี่ยน",null,"ละลาย/เดือด อุณหภูมิแบนราบ"],
+/* optics 133-142 */
+["optics","Visible light is part of the:","electromagnetic spectrum","acoustic spectrum","ultrasonic spectrum","แสงคือคลื่นแม่เหล็กไฟฟ้าช่วงที่ตามองเห็น",null,"แสง = คลื่นแม่เหล็กไฟฟ้า, เสียง = คลื่นกล"],
+["optics","The relationship between the speed, frequency and wavelength of light is:","c = f × λ","c = f ÷ λ","c = λ ÷ f","ความเร็วคลื่น = ความถี่ × ความยาวคลื่น",null,"ความถี่สูง ความยาวคลื่นสั้น (คูณแล้วคงที่)"],
+["optics","Light of wavelength 5 × 10⁻⁷ m has a frequency of (c = 3 × 10⁸ m/s):","6 × 10¹⁴ Hz","1.5 × 10² Hz","1.7 × 10⁻¹⁵ Hz","f = c ÷ λ",["f = c ÷ λ","= 3 × 10⁸ ÷ 5 × 10⁻⁷","= 0.6 × 10¹⁵ = 6 × 10¹⁴ Hz"],"หารเลขหน้า เลขยกกำลังลบกัน (8 − (−7) = 15)"],
+["optics","The refractive index of a material is 1.5. The speed of light in the material (c = 3 × 10⁸ m/s) is:","2 × 10⁸ m/s","4.5 × 10⁸ m/s","1.5 × 10⁸ m/s","n = c ÷ v ดังนั้น v = c ÷ n",["v = c ÷ n","= 3 × 10⁸ ÷ 1.5 = 2 × 10⁸ m/s"],"ในตัวกลาง แสงช้ากว่า c เสมอ (ตัวเลือก 4.5 มากกว่า c ตัดทิ้งได้)"],
+["optics","A concave mirror is used to:","focus light and magnify an image","give a wider field of view with a smaller image","bend light by refraction","กระจกเว้ารวมแสง ขยายภาพ ใช้ในกล้องโทรทรรศน์ กระจกแต่งหน้า",null,"เว้า = ขยาย, นูน = มุมกว้าง"],
+["optics","The law of reflection states that the angle of incidence equals the:","angle of reflection","angle of refraction","critical angle","มุมตกกระทบเท่ากับมุมสะท้อน",null,"สะท้อน = มุมเท่ากัน"],
+["optics","The bending of light as it passes from one medium into another is called:","refraction","reflection","diffraction","การหักเหเกิดเพราะความเร็วแสงเปลี่ยนตามตัวกลาง",null,"Refraction = หักเห, Reflection = สะท้อน"],
+["optics","When light passes from air into glass at an angle, its frequency:","stays the same","increases","decreases","ความถี่ถูกกำหนดที่แหล่งกำเนิด ความเร็วและความยาวคลื่นเท่านั้นที่เปลี่ยน",null,"ความถี่คงที่ ความยาวคลื่นสั้นลง"],
+["optics","Compared with multi-mode fibre, single-mode fibre has:","a much smaller core","a larger core","no cladding","single-mode แกนเล็กมาก ส่งสัญญาณได้ทีละเส้นทาง",null,"Single = เล็ก เส้นเดียว"],
+["optics","Attenuation in a fibre optic cable is:","the loss of light intensity along the fibre","the increase in signal strength along the fibre","the minimum bend radius of the cable","attenuation = การสูญเสียความเข้มแสง จากการกระเจิงและการดูดกลืน",null,"สูญเสียมากสุดที่ splice และ connector"],
+/* sound 143-155 */
+["sound","Of the following, sound travels fastest through:","steel","air","a vacuum","เสียงเร็วในของแข็งที่ยืดหยุ่น เช่นเหล็ก เร็วกว่าอากาศมาก และไม่เดินทางในสุญญากาศ",null,"ของแข็ง > ของเหลว > แก๊ส (ส่วนใหญ่)"],
+["sound","The distance between two adjacent crests of a wave is the:","wavelength","amplitude","period","wavelength = ระยะจากยอดคลื่นถึงยอดถัดไป",null,"แอมพลิจูด = ความสูงคลื่น"],
+["sound","Frequency is measured in:","hertz","decibels","metres","Hz = รอบต่อวินาที",null,"dB = ความเข้มเสียง"],
+["sound","Sound intensity is measured in:","decibels","hertz","newtons","ความเข้มเสียงวัดเป็นเดซิเบล",null,"dB เทียบอัตราส่วนของเสียง"],
+["sound","A wave of frequency 500 Hz travels at 340 m/s. Its wavelength is:","0.68 m","170 000 m","1.47 m","λ = v ÷ f",["λ = v ÷ f","= 340 ÷ 500 = 0.68 m"],"ความถี่สูง ความยาวคลื่นสั้น (500 Hz ควรได้ไม่ถึง 1 m)"],
+["sound","The period of a wave with a frequency of 50 Hz is:","0.02 s","50 s","0.5 s","คาบ = 1 ÷ ความถี่",["T = 1 ÷ f","= 1 ÷ 50 = 0.02 s"],"คาบกับความถี่เป็นส่วนกลับกัน"],
+["sound","Two sound waves arriving at a listener in phase will:","reinforce each other","cancel each other","have no effect on each other","เฟสตรงกันรวมกันดังขึ้น เฟสตรงข้ามหักล้างกัน",null,"In phase = เสริม, out of phase = หักล้าง"],
+["sound","A standing wave is produced by:","a wave and its reflection combining","the Doppler effect","a change in the speed of sound","คลื่นเดินทางไปสะท้อนที่ขอบเขตแล้วรวมกับคลื่นเดิม",null,"สะท้อน + คลื่นเดิม = คลื่นนิ่ง"],
+["sound","Which statement describes a transverse wave?","particles move at right angles to the direction of travel","particles move back and forth along the direction of travel","no particles move","เช่นคลื่นน้ำ ส่วนเสียงเป็นคลื่นตามยาว",null,"Transverse = ตั้งฉาก (น้ำ), Longitudinal = ตามยาว (เสียง)"],
+["sound","Mach number is defined as:","aircraft speed ÷ speed of sound","speed of sound ÷ aircraft speed","aircraft speed × speed of sound","Mach = ความเร็วเครื่อง ÷ ความเร็วเสียง",null,"V ÷ a"],
+["sound","An aircraft flies at Mach 0.8 where the speed of sound is 660 mph. Its speed is:","528 mph","825 mph","660 mph","ความเร็ว = Mach × ความเร็วเสียง",["V = M × a","= 0.8 × 660 = 528 mph"],"Mach < 1 ความเร็วต้องน้อยกว่าความเร็วเสียง (ตัดตัวเลือก 825 ได้)"],
+["sound","As a sound source moves away from a stationary observer, the observed pitch:","decreases","increases","stays the same","Doppler: ออกห่าง = ความถี่ต่ำลง",null,"เข้า = แหลม, ออก = ทุ้ม"],
+["sound","The smallest change in sound intensity that the human ear can detect is about:","1 dB","10 dB","100 dB","หนังสือกำหนด 1 เดซิเบลคือการเปลี่ยนที่หูรับรู้ได้น้อยที่สุด",null,"1 dB = เล็กสุดที่ได้ยินต่าง"]
+];
+B.push.apply(B, NEW);
+
+/* steps and keys for the original bank (index → [steps, key]) */
+var CALC = {
+9:[["Fb = V × ρ(น้ำ)","= 8 × 62.4 = 499.2 lb"],"แรงลอยตัว = ปริมาตร × ความหนาแน่นของของไหล (น้ำจืด 62.4 lb/ft³)"],
+14:[["a = (Vf − Vi) ÷ t","= (900 − 300) ÷ 30 = 600 ÷ 30 = 20 mph/s"],"ลบความเร็วก่อน แล้วหารเวลา"],
+16:[["Fc = m v² ÷ r","มวลเป็น 2 เท่า → Fc เป็น 2 เท่า"],"Fc แปรผันตรงกับมวล"],
+17:[["Fc = m v² ÷ r","r ลดครึ่ง → ตัวหารลดครึ่ง → Fc เป็น 2 เท่า"],"Fc แปรผกผันกับรัศมี"],
+20:[["E × L = R × l","E × 40 = 200 × 10 = 2 000","E = 2 000 ÷ 40 = 50 lb"],"แขนแรงยาวกว่า 4 เท่า แรงเหลือ 1/4"],
+22:[["MA = จำนวนเส้นที่รับน้ำหนัก = 5","E = 500 ÷ 5 = 100 lb"],"นับเส้นเชือกที่แบกของ"],
+23:[["ฟัน1 × รอบ1 = ฟัน2 × รอบ2","40 × N1 = 10 × N2 → N2 = 4 × N1"],"ฟันมาก = ช้า ฟันน้อย = เร็ว"],
+24:[["อัตราทด = ring ÷ sun","= 90 ÷ 30 = 3"],"ring หาร sun"],
+25:[["MA = ความยาว ÷ ความสูง","= 20 ÷ 4 = 5"],"ทางเอียงยาว = ได้แรง"],
+27:[["มวล = W ÷ g","= 6 440 ÷ 32.2 = 200 slugs"],"32.2 lb = 1 slug"],
+28:[["PE = W × h","= 2 000 × 5 = 10 000 ft-lb"],"น้ำหนัก × ความสูง"],
+29:[["KE = ½ m v²","v → 2v ⇒ KE → ½ m (2v)² = 4 × ½ m v²","KE เพิ่ม 4 เท่า"],"ความเร็วถูกยกกำลังสอง"],
+30:[["งาน = F × d","= 50 × 30 = 1 500 ft-lb"],"แรง × ระยะ"],
+31:[["งาน = 6 600 × 10 = 66 000 ft-lb","กำลัง = 66 000 ÷ 1 min = 66 000 ft-lb/min","hp = 66 000 ÷ 33 000 = 2 hp"],"1 hp = 33 000 ft-lb/min"],
+32:[["T = hp × 5 252 ÷ rpm","= 270 × 5 252 ÷ 2 700","= 525.2 lb-ft"],"270 กับ 2 700 หารกันได้ 10 เท่า → 5 252 ÷ 10 ≈ 525"],
+34:[["F = μ × N","= 0.25 × 80 = 20 lb"],"สัมประสิทธิ์ × แรงตั้งฉาก"],
+38:[["ρ = W ÷ V","= 540 ÷ 12 = 45 lb/ft³"],"น้ำหนักต่อปริมาตร"],
+39:[["SG = ρ ÷ ρ(น้ำ)","= 45 ÷ 62.4 ≈ 0.72"],"SG < 1 → ลอยน้ำ"],
+40:[["P = F ÷ A = 10 ÷ 2 = 5 psi","F2 = P × A2 = 5 × 20 = 100 lb"],"สามเหลี่ยม F-P-A"],
+41:[["ปริมาตรเข้า = ออก: A1 × d1 = A2 × d2","2 × 10 = 20 × d2","d2 = 1 in"],"แรงเพิ่ม 10 เท่า ระยะเหลือ 1/10"],
+46:[["°C = (°F − 32) × 5/9","= (68 − 32) × 5/9 = 36 × 5/9 = 20 °C"],"ลบ 32 ก่อน แล้วคูณ 5/9"],
+47:[["K = °C + 273","= 50 + 273 = 323 K"],"K = °C + 273"],
+48:[["°R = °F + 460","= 100 + 460 = 560 °R"],"°R = °F + 460"],
+52:[["P1V1 = P2V2","100 × 10 = P2 × 4","P2 = 1 000 ÷ 4 = 250 psia"],"ปริมาตรลด ความดันเพิ่ม"],
+53:[["ปริมาตรคงที่: P1 ÷ T1 = P2 ÷ T2","P2 = 100 × 600 ÷ 500 = 120 psia"],"T เพิ่ม 1.2 เท่า P เพิ่ม 1.2 เท่า"],
+77:[["Mach = V ÷ a","= 1 140 ÷ 760 = 1.5"],"ความเร็วเครื่อง หารความเร็วเสียง"]
+};
+function info(id){
+  var q = B[id];
+  if(q.length>=8 && (q[6] || q[7])) return {steps:q[6], key:q[7]};
+  if(CALC[id]) return {steps:CALC[id][0], key:CALC[id][1]};
+  return null;
+}
+
+/* ===== helpers ===== */
+var TOP = ["matter","mech","thermo","optics","sound"];
+var TN = {matter:"Matter",mech:"Mechanics",thermo:"Thermodynamics",optics:"Optics",sound:"Wave and Sound"};
+var KEYS = ["A","B","C"];
+var LS = "m02-sets-v1";
+function ld(k,d){ try{ var v = JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } }
+function sv(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function el(tag,cls,html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+/* split every topic across the 3 sets so each set has 52 questions in the same topic mix */
+var SETS = {A:[],B:[],C:[]};
+TOP.forEach(function(t){
+  var ids = [];
+  B.forEach(function(b,i){ if(b[0]===t) ids.push(i); });
+  ids.forEach(function(id,k){ SETS[KEYS[k%3]].push(id); });
+});
+
+function freshSet(k){
+  var perm = {};
+  SETS[k].forEach(function(id){ perm[id] = shuffle([0,1,2]); });
+  return {order:shuffle(SETS[k]), perm:perm, picks:{}, cur:0};
+}
+function validSet(s,k){
+  if(!s || !s.order || s.order.length!==SETS[k].length || !s.perm || !s.picks) return false;
+  return s.order.every(function(id){ return SETS[k].indexOf(id)>-1 && s.perm[id]; });
+}
+
+function sets(root){
+  root.innerHTML = "";
+  var wrap = el("div","mock"); root.appendChild(wrap);
+  var st = ld(LS,{});
+  KEYS.forEach(function(k){ if(!validSet(st[k],k)) st[k] = freshSet(k); });
+  if(KEYS.indexOf(st.active)<0) st.active = "A";
+  var view = "q";
+  var LET = ["A","B","C"];
+
+  function stats(k){
+    var s = st[k], a = 0, ok = 0;
+    s.order.forEach(function(id){ if(s.picks[id]!==undefined){ a++; if(s.picks[id]===0) ok++; } });
+    return {a:a, ok:ok, n:s.order.length};
+  }
+  function save(){ sv(LS, st); }
+
+  function draw(){
+    wrap.innerHTML = "";
+    var k = st.active, s = st[k];
+    wrap.appendChild(el("h2",null,"Mock test 3 ชุด — Module 2 Physics (B1)"));
+    wrap.appendChild(el("div","note",
+      "ชุดละ 52 ข้อ แบ่งหัวข้อเหมือนกันทั้ง 3 ชุด ตัวเลือก 3 ข้อ <b>เฉลยและคำอธิบายขึ้นทันทีหลังตอบ</b> ข้อที่มีการคำนวณจะแสดงวิธีทำและเทคนิค สลับชุดได้ตลอด ระบบจำคำตอบแต่ละชุดไว้ในเบราว์เซอร์ ปุ่ม Shuffle จะสลับลำดับข้อและลำดับตัวเลือกใหม่โดยคำตอบที่ตอบแล้วยังอยู่ครบ"));
+
+    var tabs = el("div","tabs");
+    KEYS.forEach(function(x){
+      var q = stats(x);
+      var b = el("button","tab" + (x===k?" on":""), "<b>ชุด " + x + "</b><span>ตอบ " + q.a + "/" + q.n + " · ถูก " + q.ok + "</span>");
+      b.addEventListener("click", function(){ st.active = x; view = "q"; save(); draw(); });
+      tabs.appendChild(b);
+    });
+    wrap.appendChild(tabs);
+
+    var act = el("div","qnav");
+    var sh = el("button",null,"⇄ Shuffle ข้อและตัวเลือก");
+    sh.addEventListener("click", function(){
+      s.order = shuffle(SETS[k]);
+      SETS[k].forEach(function(id){ s.perm[id] = shuffle([0,1,2]); });
+      s.cur = 0; view = "q"; save(); draw();
+    });
+    var sm = el("button",null, view==="sum" ? "← กลับไปทำข้อสอบ" : "ดูสรุปผลชุดนี้");
+    sm.addEventListener("click", function(){ view = view==="sum" ? "q" : "sum"; draw(); });
+    var rs = el("button",null,"ล้างคำตอบชุดนี้");
+    rs.addEventListener("click", function(){
+      if(!confirm("ล้างคำตอบทั้งหมดของชุด " + k + " ?")) return;
+      s.picks = {}; s.cur = 0; view = "q"; save(); draw();
+    });
+    act.appendChild(sh); act.appendChild(sm); act.appendChild(rs);
+    wrap.appendChild(act);
+
+    var grid = el("div","qgrid");
+    s.order.forEach(function(id,i){
+      var p = s.picks[id];
+      var c = "g" + (p===undefined ? "" : (p===0 ? " right" : " wrong")) + (i===s.cur && view==="q" ? " cur" : "");
+      var g = el("button",c,String(i+1));
+      g.setAttribute("aria-label","ข้อ " + (i+1));
+      g.addEventListener("click", function(){ s.cur = i; view = "q"; save(); draw(); });
+      grid.appendChild(g);
+    });
+    wrap.appendChild(grid);
+
+    if(view==="sum"){ summary(k,s); return; }
+    question(k,s);
+  }
+
+  function question(k,s){
+    var id = s.order[s.cur], b = B[id], p = s.picks[id], perm = s.perm[id];
+    var inf = info(id), isCalc = !!(inf && inf.steps);
+    var card = el("div","qcard");
+    var head = el("div","qhead","<span>ข้อ " + (s.cur+1) + "/" + s.order.length + " · " + TN[b[0]] + "</span>" + (isCalc ? "<span class='badge'>คำนวณ</span>" : ""));
+    card.appendChild(head);
+    card.appendChild(el("p","stem",esc(b[1])));
+    var base = [b[2],b[3],b[4]];
+    perm.forEach(function(bi,pos){
+      var cls = "opt";
+      if(p!==undefined){
+        if(bi===0) cls += " right"; else if(p===bi) cls += " wrong";
+      }
+      var o = el("button",cls,"<span class='ltr'>"+LET[pos]+"</span><span>"+esc(base[bi])+"</span>");
+      o.addEventListener("click", function(){
+        if(s.picks[id]!==undefined) return;
+        s.picks[id] = bi; save(); draw();
+      });
+      card.appendChild(o);
+    });
+    if(p!==undefined){
+      var right = perm.indexOf(0);
+      var good = p===0;
+      var ex = el("div","expl",
+        "<b>" + (good ? "✓ ถูกต้อง" : "✗ ผิด — คำตอบที่ถูกคือ " + LET[right] + ". " + esc(b[2])) + "</b><br>" + esc(b[5]));
+      card.appendChild(ex);
+      if(inf && inf.steps){
+        var cb = el("div","calcbox","<b>วิธีคำนวณ</b>");
+        var ol = el("ol"); inf.steps.forEach(function(t){ ol.appendChild(el("li",null,esc(t))); });
+        cb.appendChild(ol); card.appendChild(cb);
+      }
+      if(inf && inf.key){
+        card.appendChild(el("div","keybox","<b>เทคนิค / Key:</b> " + esc(inf.key)));
+      }
+      var again = el("button","linkbtn","ทำข้อนี้ใหม่");
+      again.addEventListener("click", function(){ delete s.picks[id]; save(); draw(); });
+      card.appendChild(again);
+    }
+    wrap.appendChild(card);
+    var nav = el("div","qnav");
+    var pv = el("button",null,"← ก่อนหน้า"); pv.disabled = s.cur===0;
+    pv.addEventListener("click", function(){ s.cur--; save(); draw(); window.scrollTo(0,0); });
+    var nx = el("button",null,"ถัดไป →"); nx.disabled = s.cur===s.order.length-1;
+    nx.addEventListener("click", function(){ s.cur++; save(); draw(); window.scrollTo(0,0); });
+    var un = el("button",null,"ไปข้อที่ยังไม่ได้ตอบ");
+    un.addEventListener("click", function(){
+      for(var i=1;i<=s.order.length;i++){
+        var j=(s.cur+i)%s.order.length;
+        if(s.picks[s.order[j]]===undefined){ s.cur=j; save(); draw(); window.scrollTo(0,0); return; }
+      }
+    });
+    nav.appendChild(pv); nav.appendChild(nx); nav.appendChild(un);
+    wrap.appendChild(nav);
+  }
+
+  function summary(k,s){
+    var q = stats(k), by = {}, wrongIdx = [];
+    s.order.forEach(function(id,i){
+      var t = B[id][0]; by[t] = by[t] || {n:0,a:0,ok:0};
+      by[t].n++;
+      if(s.picks[id]!==undefined){ by[t].a++; if(s.picks[id]===0) by[t].ok++; else wrongIdx.push(i); }
+    });
+    var need = Math.ceil(q.n*0.75), pct = Math.round(q.ok*100/q.n);
+    var done = q.a===q.n, pass = q.ok>=need;
+    wrap.appendChild(el("div","score " + (done ? (pass?"pass":"fail") : ""),
+      "<div class='big-n'>" + q.ok + "/" + q.n + " <small>(" + pct + "%)</small></div>" +
+      "<div>ตอบแล้ว " + q.a + "/" + q.n + " ข้อ · " + (done ? (pass ? "ผ่านเกณฑ์ 75%" : "ยังไม่ถึงเกณฑ์ 75% (ต้องได้ " + need + " ข้อ)") : "ยังทำไม่ครบ เกณฑ์ผ่านคือ " + need + " ข้อ") + "</div>"));
+    var rows = TOP.map(function(t){
+      var x = by[t]; if(!x) return "";
+      var p = x.a ? Math.round(x.ok*100/x.a) : 0;
+      return "<tr><td>"+TN[t]+"</td><td>"+x.ok+"/"+x.n+"</td><td>"+(x.a?p+"%":"-")+"</td><td>"+(x.a && p<75?"ควรทบทวน":"")+"</td></tr>";
+    }).join("");
+    wrap.appendChild(el("div","tablewrap","<table><thead><tr><th>หัวข้อ</th><th>ถูก/ทั้งหมด</th><th>% ของที่ตอบ</th><th></th></tr></thead><tbody>"+rows+"</tbody></table>"));
+    if(wrongIdx.length){
+      wrap.appendChild(el("h3",null,"ข้อที่ผิด (กดเพื่อกลับไปดูเฉลย)"));
+      var chips = el("div","chips");
+      wrongIdx.forEach(function(i){
+        var c = el("button","chip","ข้อ " + (i+1));
+        c.addEventListener("click", function(){ s.cur = i; view = "q"; save(); draw(); });
+        chips.appendChild(c);
+      });
+      wrap.appendChild(chips);
+    }
+  }
+  draw();
+}
+
+window.M02R = window.M02R || {};
+window.M02R.sets = sets;
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script>
+(function(){
+  var NAV = [
+    {k:'overview', t:'ภาพรวม', s:'Plan and how to use'},
+    {k:'day1', t:'Day 1', s:'Matter + Statics'},
+    {k:'day2', t:'Day 2', s:'Kinetics'},
+    {k:'day3', t:'Day 3', s:'Simple machines'},
+    {k:'day4', t:'Day 4', s:'Dynamics'},
+    {k:'day5', t:'Day 5', s:'Fluid dynamics'},
+    {k:'day6', t:'Day 6', s:'Thermodynamics'},
+    {k:'day7', t:'Day 7', s:'Optics, sound, review'},
+    {k:'calc', t:'ฝึกคำนวณ', s:'Calculation lab'},
+    {k:'sets', t:'Mock 3 ชุด', s:'เฉลยทันที · สลับข้อ'},
+    {k:'mock', t:'Mock test', s:'52 ข้อ · 65 นาที'},
+    {k:'cheat', t:'Cheat sheet', s:'สูตรและ trick จำ'},
+    {k:'test', t:'Self-test', s:'เฉลย / Answers'}
+  ];
+  var DAYS = ['day1','day2','day3','day4','day5','day6','day7'];
+  var STORE = 'm02-guide-done';
+
+  function keyOf(h){
+    var m = /^Day (\d)/.exec(h); if (m) return 'day' + m[1];
+    if (/^Cheat/.test(h)) return 'cheat';
+    if (/^(Self-test|คำถามท้ายบท)/.test(h)) return 'test';
+    return 'overview';
+  }
+
+  var secs = {}, cur = 'overview';
+  document.getElementById('md').textContent.split('\n').forEach(function(line){
+    if (line.indexOf('## ') === 0) cur = keyOf(line.slice(3));
+    (secs[cur] = secs[cur] || []).push(line);
+  });
+
+  function loadDone(){ try { return JSON.parse(localStorage.getItem(STORE) || '[]'); } catch(e){ return []; } }
+  function saveDone(a){ try { localStorage.setItem(STORE, JSON.stringify(a)); } catch(e){} }
+  var done = loadDone();
+
+  var navEl = document.getElementById('navlist');
+  var content = document.getElementById('content');
+  var progress = document.getElementById('progress');
+
+  function buildNav(active){
+    navEl.innerHTML = '';
+    NAV.forEach(function(n){
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + n.k;
+      if (n.k === active) a.setAttribute('aria-current','page');
+      var txt = document.createElement('span');
+      txt.innerHTML = '<span class="nav-t"></span><span class="nav-s"></span>';
+      txt.querySelector('.nav-t').textContent = n.t;
+      txt.querySelector('.nav-s').textContent = n.s;
+      a.appendChild(txt);
+      var tick = document.createElement('span');
+      var isDay = DAYS.indexOf(n.k) > -1;
+      tick.className = 'tick' + (isDay ? '' : ' none') + (done.indexOf(n.k) > -1 ? ' on' : '');
+      tick.textContent = '✓';
+      tick.setAttribute('aria-hidden','true');
+      a.appendChild(tick);
+      li.appendChild(a);
+      navEl.appendChild(li);
+    });
+    var c = done.filter(function(k){ return DAYS.indexOf(k) > -1; }).length;
+    progress.innerHTML = 'อ่านแล้ว <b>' + c + '</b>/7 วัน';
+  }
+
+  function decorate(){
+    // tables
+    content.querySelectorAll('table').forEach(function(t){
+      var heads = Array.prototype.map.call(t.querySelectorAll('thead th'), function(h){ return h.textContent; });
+      var wrap = document.createElement('div'); wrap.className = 'tablewrap';
+      t.parentNode.insertBefore(wrap, t); wrap.appendChild(t);
+      if (heads.length === 3 && /English/.test(heads[1]) && /ไทย/.test(heads[2])) {
+        t.classList.add('bi');
+        t.querySelectorAll('thead th')[1].classList.add('c-en');
+        t.querySelectorAll('thead th')[2].classList.add('c-th');
+        t.querySelectorAll('tbody tr').forEach(function(tr){
+          var td = tr.children;
+          td[1].classList.add('c-en'); td[1].setAttribute('data-label','EN');
+          td[2].classList.add('c-th'); td[2].setAttribute('data-label','ไทย');
+        });
+      }
+      // plan table: link day numbers
+      if (/^วัน/.test(heads[0] || '') && /หัวข้อ/.test(heads[1] || '')) {
+        t.querySelectorAll('tbody tr').forEach(function(tr){
+          var c = tr.children[0], n = c.textContent.trim();
+          if (/^\d$/.test(n)) { c.innerHTML = '<a href="#day' + n + '">Day ' + n + '</a>'; }
+        });
+      }
+    });
+    // formulas
+    content.querySelectorAll('pre > code.language-latex').forEach(function(code){
+      var pre = code.parentNode, src = code.textContent;
+      if (window.katex) {
+        var div = document.createElement('div'); div.className = 'formula';
+        try { window.katex.render(src, div, {displayMode:true, throwOnError:false, strict:'ignore'}); pre.parentNode.replaceChild(div, pre); } catch(e){}
+      }
+    });
+    // tricks and practice lists
+    content.querySelectorAll('h3').forEach(function(h){
+      var nx = h.nextElementSibling;
+      if (!nx) return;
+      if (/Memory trick/.test(h.textContent) && nx.tagName === 'UL') nx.classList.add('tricks');
+      if (/โจทย์ท้ายวัน/.test(h.textContent) && nx.tagName === 'OL') nx.classList.add('practice');
+    });
+  }
+
+  function pager(k){
+    var i = NAV.findIndex(function(n){ return n.k === k; });
+    var bar = document.createElement('div'); bar.className = 'pager';
+    var prev = document.createElement(i > 0 ? 'a' : 'span');
+    if (i > 0) { prev.href = '#' + NAV[i-1].k; prev.textContent = '← ' + NAV[i-1].t; }
+    bar.appendChild(prev);
+    if (DAYS.indexOf(k) > -1) {
+      var b = document.createElement('button'); b.type = 'button';
+      var isDone = done.indexOf(k) > -1;
+      b.textContent = isDone ? 'อ่านวันนี้แล้ว (กดเพื่อยกเลิก)' : 'ทำเครื่องหมายว่าอ่านวันนี้แล้ว';
+      if (isDone) b.className = 'done';
+      b.addEventListener('click', function(){
+        var j = done.indexOf(k);
+        if (j > -1) done.splice(j,1); else done.push(k);
+        saveDone(done); buildNav(k);
+        b.className = done.indexOf(k) > -1 ? 'done' : '';
+        b.textContent = done.indexOf(k) > -1 ? 'อ่านวันนี้แล้ว (กดเพื่อยกเลิก)' : 'ทำเครื่องหมายว่าอ่านวันนี้แล้ว';
+      });
+      bar.appendChild(b);
+    }
+    var next = document.createElement(i < NAV.length - 1 ? 'a' : 'span');
+    if (i < NAV.length - 1) { next.href = '#' + NAV[i+1].k; next.textContent = NAV[i+1].t + ' →'; }
+    bar.appendChild(next);
+    content.appendChild(bar);
+  }
+
+  function show(){
+    var k = (location.hash || '').replace('#','');
+    var R = window.M02R && window.M02R[k];
+    if (!secs[k] && !R) k = 'overview';
+    R = window.M02R && window.M02R[k];
+    if (R) {
+      content.innerHTML = '';
+      R(content);
+    } else {
+      content.innerHTML = marked.parse(secs[k].join('\n'), {gfm:true});
+      decorate();
+      pager(k);
+    }
+    buildNav(k);
+    document.title = (k === 'overview' ? '' : NAV.filter(function(n){return n.k===k;})[0].t + ' · ') + 'EASA Module 02 Physics';
+    window.scrollTo(0,0);
+  }
+
+  // Column switch
+  var seg = document.querySelectorAll('.seg button');
+  seg.forEach(function(b){
+    b.addEventListener('click', function(){
+      document.body.setAttribute('data-cols', b.getAttribute('data-cols'));
+      seg.forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    });
+  });
+
+  window.addEventListener('hashchange', show);
+  show();
+})();
+</script>
+</body>
+</html>
